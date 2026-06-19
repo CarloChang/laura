@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Laura — vintage beauty-magazine editorial palette (from /_design-ref/INSPO)
+   paper cream · ink · terracotta · olive · dusty blue · burgundy
+   ──────────────────────────────────────────────────────────────────────────── */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* brand accents available as utilities: bg-terracotta, text-olive, etc. */
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-terracotta: var(--terracotta);
+  --color-olive: var(--olive);
+  --color-dusty: var(--dusty);
+  --color-burgundy: var(--burgundy);
+  --color-blush: var(--blush);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-dm-serif), ui-serif, Georgia, serif;
+  --font-condensed: var(--font-anton), "Arial Narrow", sans-serif;
+  --font-script: var(--font-caveat), cursive;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* raw brand palette */
+  --paper: #f5efe3;
+  --ink: #1f1b16;
+  --terracotta: #c75a2b;
+  --olive: #7c7c3e;
+  --dusty: #7d99a8;
+  --burgundy: #7b2d3a;
+  --blush: #e7b9a6;
+
+  /* semantic (shadcn) */
+  --background: #f5efe3;
+  --foreground: #1f1b16;
+  --card: #fbf7ee;
+  --card-foreground: #1f1b16;
+  --popover: #fbf7ee;
+  --popover-foreground: #1f1b16;
+  --primary: #1f1b16;
+  --primary-foreground: #f8f3e8;
+  --secondary: #e7ddc8;
+  --secondary-foreground: #1f1b16;
+  --muted: #ece3d2;
+  --muted-foreground: #6b6253;
+  --accent: #c75a2b;
+  --accent-foreground: #fbf7ee;
+  --destructive: #9a2c2c;
+  --border: #ddd0b8;
+  --input: #ddd0b8;
+  --ring: #c75a2b;
+}
+
+.dark {
+  --background: #1f1b16;
+  --foreground: #f5efe3;
+  --card: #2a251e;
+  --card-foreground: #f5efe3;
+  --popover: #2a251e;
+  --popover-foreground: #f5efe3;
+  --primary: #f5efe3;
+  --primary-foreground: #1f1b16;
+  --secondary: #34302a;
+  --secondary-foreground: #f5efe3;
+  --muted: #34302a;
+  --muted-foreground: #b8ad99;
+  --accent: #c75a2b;
+  --accent-foreground: #fbf7ee;
+  --destructive: #c14545;
+  --border: #ffffff1a;
+  --input: #ffffff26;
+  --ring: #c75a2b;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+}
+
+/* ── editorial helpers ─────────────────────────────────────────────────────── */
+
+/* subtle printed-paper grain over the whole page */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.uppercase-condensed {
+  font-family: var(--font-condensed);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.92;
+}
+
+.script {
+  font-family: var(--font-script);
+}
+
+/* thin hand-drawn underline used under headings (see inspo "Nails Done.") */
+.hand-underline {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='12' viewBox='0 0 200 12'%3E%3Cpath d='M2 7 C 50 2, 150 2, 198 6' stroke='%23c75a2b' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% 0.5em;
+  padding-bottom: 0.35em;
+}

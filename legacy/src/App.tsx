@@ -107,7 +107,7 @@ function IconX({ size = "md" }: { size?: "sm" | "md" }) {
 
 function NailCard({ product, onSelect }: { product: NailProduct; onSelect: (p: NailProduct) => void }) {
   return (
-    <div className="flex flex-col h-full border border-[#9B1B30]/30">
+    <div className="flex flex-col">
       <button
         onClick={() => onSelect(product)}
         className="aspect-square overflow-hidden cursor-pointer block w-full"
@@ -118,9 +118,9 @@ function NailCard({ product, onSelect }: { product: NailProduct; onSelect: (p: N
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
         />
       </button>
-      <div className="px-2.5 py-2 flex flex-col border-t border-[#9B1B30]/20">
-        <p className="text-sm text-[#9B1B30] leading-snug line-clamp-2 italic font-semibold">{product.name}</p>
-        <p className="text-sm text-[#5C4033] mt-1" style={{ fontFamily: "system-ui, sans-serif" }}>{product.price}</p>
+      <div className="pt-2 pb-1">
+        <p className="text-xs text-[#9B1B30] leading-snug line-clamp-2 italic font-semibold">{product.name}</p>
+        <p className="text-xs text-[#5C4033] mt-0.5" style={{ fontFamily: "system-ui, sans-serif" }}>{product.price}</p>
       </div>
     </div>
   );
@@ -132,7 +132,14 @@ function AboutTab() {
   const [openId, setOpenId] = useState<number | null>(null);
 
   return (
-    <div className="flex flex-col pt-4">
+    <div className="flex flex-col pt-6">
+      <h2
+        style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900 }}
+        className="text-6xl leading-none text-[#9B1B30] uppercase tracking-tight"
+      >
+        Sobre mí
+      </h2>
+      <div className="h-px bg-[#9B1B30]/30 mt-3 mb-6" />
       {ABOUT_ITEMS.map((item) => {
         const isOpen = openId === item.id;
         return (
@@ -173,12 +180,21 @@ function AboutTab() {
 
 // ─── ShopTab ──────────────────────────────────────────────────────────────────
 
-function ShopTab({ products, onSelect }: { products: NailProduct[]; onSelect: (p: NailProduct) => void }) {
+function ShopTab({ products, onSelect, label }: { products: NailProduct[]; onSelect: (p: NailProduct) => void; label: string }) {
   return (
-    <div className="grid grid-cols-2 gap-4 pt-4">
-      {products.map((product) => (
-        <NailCard key={product.id} product={product} onSelect={onSelect} />
-      ))}
+    <div className="pt-6">
+      <h2
+        style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900 }}
+        className="text-6xl leading-none text-[#9B1B30] uppercase tracking-tight"
+      >
+        {label}
+      </h2>
+      <div className="h-px bg-[#9B1B30]/30 mt-3 mb-6" />
+      <div className="grid grid-cols-2 gap-x-4 gap-y-6">
+        {products.map((product) => (
+          <NailCard key={product.id} product={product} onSelect={onSelect} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -322,6 +338,7 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-[#E5DDCB] max-w-md mx-auto">
+      <div className="paper-grain" aria-hidden="true" />
       {/* ── Hero ──────────────────────────────────────────── */}
       <div
         className="flex flex-col items-center pt-14 pb-8 px-6 border-b border-[#9B1B30]/25"
@@ -374,8 +391,8 @@ export function App() {
       {/* ── Content ───────────────────────────────────────── */}
       <div key={activeTab} className="px-4 pb-10 tab-content">
         {activeTab === "links"   && <AboutTab />}
-        {activeTab === "shop"    && <ShopTab products={PRODUCTS} onSelect={setSelectedProduct} />}
-        {activeTab === "makeups" && <ShopTab products={MAKEUPS}  onSelect={setSelectedProduct} />}
+        {activeTab === "shop"    && <ShopTab products={PRODUCTS} onSelect={setSelectedProduct} label="Uñas" />}
+        {activeTab === "makeups" && <ShopTab products={MAKEUPS}  onSelect={setSelectedProduct} label="Makeup" />}
       </div>
 
       {/* ── Footer ────────────────────────────────────────── */}
