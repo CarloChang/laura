@@ -57,6 +57,23 @@ export async function deleteProduct(formData: FormData) {
   revalidatePath("/admin");
 }
 
+export async function saveProductOrder(orderedIds: string[]) {
+  const supabase = await createClient();
+
+  // Assign sort_order to match the given order. Relative order within each
+  // category is preserved, which is what the storefront sorts by.
+  const { error } = await Promise.all(
+    orderedIds.map((id, i) =>
+      supabase.from("products").update({ sort_order: i }).eq("id", id),
+    ),
+  ).then((results) => ({ error: results.find((r) => r.error)?.error }));
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/");
+  revalidatePath("/admin");
+}
+
 export async function updateOrderStatus(formData: FormData) {
   const id = String(formData.get("id") ?? "");
   const status = String(formData.get("status") ?? "new") as OrderStatus;

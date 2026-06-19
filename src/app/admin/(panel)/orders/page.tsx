@@ -1,5 +1,6 @@
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
+import { ImageLightbox } from "@/components/admin/image-lightbox";
 import { updateOrderStatus, deleteOrder } from "../../actions";
 import type { CustomOrder, OrderStatus } from "@/lib/types";
 
@@ -48,79 +49,70 @@ export default async function OrdersPage() {
               key={o.id}
               className="rounded-lg border border-border bg-card p-5"
             >
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h2 className="font-display text-xl">{o.name}</h2>
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${STATUS_STYLE[o.status]}`}
-                    >
-                      {o.status.replace("_", " ")}
-                    </span>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    {o.instagram && `${o.instagram} · `}
-                    {new Date(o.created_at).toLocaleDateString()}
-                  </p>
-                </div>
-                {o.size_photo && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={o.size_photo}
-                    alt="size reference"
-                    className="h-20 w-20 rounded-md border border-border object-cover"
-                  />
-                )}
+              <div className="flex items-center gap-2">
+                <h2 className="font-display text-xl">{o.name}</h2>
+                <span
+                  className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase ${STATUS_STYLE[o.status]}`}
+                >
+                  {o.status.replace("_", " ")}
+                </span>
               </div>
+              <p className="text-sm text-muted-foreground">
+                {o.instagram && `${o.instagram} · `}
+                {new Date(o.created_at).toLocaleDateString()}
+              </p>
 
-              <dl className="mt-4 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
+              <div className="mt-4 grid grid-cols-2 items-start gap-x-6 gap-y-3 text-sm sm:grid-cols-3 lg:grid-cols-4">
                 <Detail label="Address" value={o.address} />
                 <Detail label="Shape" value={o.shape} />
                 <Detail label="Size" value={o.size} />
                 <Detail label="Budget" value={o.budget} />
-              </dl>
-
-              {o.design_images.length > 0 && (
-                <div className="mt-3">
-                  <p className="text-sm font-semibold">Design references:</p>
-                  <div className="mt-1 flex flex-wrap gap-2">
-                    {o.design_images.map((url) => (
-                      <a key={url} href={url} target="_blank" rel="noreferrer">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={url}
-                          alt="design reference"
-                          className="h-20 w-20 rounded-md border border-border object-cover"
-                        />
-                      </a>
-                    ))}
+                <Detail label="Comments" value={o.comments} />
+                {o.size_photo && (
+                  <div>
+                    <p className="mb-1 font-semibold">Size photo:</p>
+                    <ImageLightbox src={o.size_photo} alt="Size photo" />
                   </div>
-                </div>
-              )}
-              {o.comments && (
-                <p className="mt-3 whitespace-pre-line text-sm text-muted-foreground">
-                  <span className="font-semibold">Comments: </span>
-                  {o.comments}
-                </p>
-              )}
+                )}
+                {o.design_images.length > 0 && (
+                  <div>
+                    <p className="mb-1 font-semibold">Design references:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {o.design_images.map((url) => (
+                        <ImageLightbox
+                          key={url}
+                          src={url}
+                          alt="Design reference"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
 
-              <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-border pt-4">
+              <div className="mt-4 flex items-center gap-1.5 border-t border-border pt-4 sm:gap-2">
                 {STATUSES.map((s) => (
-                  <form key={s} action={updateOrderStatus}>
+                  <form key={s} action={updateOrderStatus} className="min-w-0 flex-1">
                     <input type="hidden" name="id" value={o.id} />
                     <input type="hidden" name="status" value={s} />
                     <Button
                       type="submit"
                       size="sm"
                       variant={o.status === s ? "default" : "outline"}
+                      className="w-full px-1.5 text-xs whitespace-nowrap sm:px-3 sm:text-sm"
                     >
                       {s.replace("_", " ")}
                     </Button>
                   </form>
                 ))}
-                <form action={deleteOrder} className="ml-auto">
+                <form action={deleteOrder}>
                   <input type="hidden" name="id" value={o.id} />
-                  <Button type="submit" size="sm" variant="destructive">
+                  <Button
+                    type="submit"
+                    size="sm"
+                    variant="destructive"
+                    className="px-1.5 text-xs whitespace-nowrap sm:px-3 sm:text-sm"
+                  >
                     Delete
                   </Button>
                 </form>
@@ -134,11 +126,12 @@ export default async function OrdersPage() {
 }
 
 function Detail({ label, value }: { label: string; value: string | null }) {
-  if (!value) return null;
   return (
     <div>
       <dt className="inline font-semibold">{label}: </dt>
-      <dd className="inline text-muted-foreground">{value}</dd>
+      <dd className="inline text-muted-foreground">
+        {value || <span className="italic opacity-60">—</span>}
+      </dd>
     </div>
   );
 }

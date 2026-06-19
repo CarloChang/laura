@@ -11,11 +11,14 @@ export default function PanelLayout({
     <div className="min-h-screen">
       <header className="border-b border-border bg-card">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6">
-          <div className="flex items-center gap-6">
-            <Link href="/admin" className="font-condensed text-xl uppercase">
+          <div className="flex items-center gap-3 sm:gap-6">
+            <Link
+              href="/admin"
+              className="font-condensed text-xl uppercase whitespace-nowrap"
+            >
               Laura <span className="text-terracotta">admin</span>
             </Link>
-            <nav className="flex items-center gap-4 text-sm">
+            <nav className="flex items-center gap-3 text-sm sm:gap-4">
               <Link href="/admin" className="hover:text-terracotta">
                 Products
               </Link>
@@ -24,11 +27,11 @@ export default function PanelLayout({
               </Link>
             </nav>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 sm:gap-3">
             <Link
               href="/"
               target="_blank"
-              className="text-sm text-muted-foreground hover:text-foreground"
+              className="hidden whitespace-nowrap text-sm text-muted-foreground hover:text-foreground sm:inline"
             >
               View site ↗
             </Link>
