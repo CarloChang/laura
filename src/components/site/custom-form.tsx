@@ -8,41 +8,58 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-const SHAPES = ["Almendra", "Coffin", "Cuadrada", "Squoval", "Stiletto", "Redonda"];
-const LENGTHS = ["Corto", "Medio", "Largo", "Extra largo"];
-const SIZE_OPTIONS = [
-  "Conozco mis tallas",
-  "Envíame primero un kit de medidas",
-  "No estoy segura / necesito ayuda",
-];
+const SHAPES = ["Ovalada", "Cuadrada"];
+const SIZES = ["Pequeño", "Mediano", "Largo"];
+const MAX_DESIGN_IMAGES = 3;
+
+// Example photo (a nail next to a coin for scale). Replace the file at
+// public/size-example.jpg with Laura's own reference photo.
+const SIZE_EXAMPLE = "/size-example.jpg";
 
 const selectClass =
   "h-10 w-full rounded-md border border-input bg-background px-3 text-sm";
+
+async function uploadToStorage(file: File): Promise<string> {
+  const supabase = createClient();
+  const ext = file.name.split(".").pop();
+  const path = `${crypto.randomUUID()}.${ext}`;
+  const { error } = await supabase.storage.from("order-refs").upload(path, file);
+  if (error) throw error;
+  return supabase.storage.from("order-refs").getPublicUrl(path).data.publicUrl;
+}
 
 export function CustomForm() {
   const [state, action, pending] = useActionState<OrderState, FormData>(
     submitOrder,
     null,
   );
-  const [image, setImage] = useState("");
-  const [uploading, setUploading] = useState(false);
+  const [sizePhoto, setSizePhoto] = useState("");
+  const [sizePhotoUploading, setSizePhotoUploading] = useState(false);
+  const [designImages, setDesignImages] = useState<string[]>([]);
+  const [designUploading, setDesignUploading] = useState(false);
+  const [exampleOk, setExampleOk] = useState(true);
 
-  async function handleUpload(file: File) {
-    setUploading(true);
+  async function handleSizePhoto(file: File) {
+    setSizePhotoUploading(true);
     try {
-      const supabase = createClient();
-      const ext = file.name.split(".").pop();
-      const path = `${crypto.randomUUID()}.${ext}`;
-      const { error } = await supabase.storage
-        .from("order-refs")
-        .upload(path, file);
-      if (error) throw error;
-      const { data } = supabase.storage.from("order-refs").getPublicUrl(path);
-      setImage(data.publicUrl);
+      setSizePhoto(await uploadToStorage(file));
     } catch {
-      // ignore — reference image is optional
+      // ignore — optional
     } finally {
-      setUploading(false);
+      setSizePhotoUploading(false);
+    }
+  }
+
+  async function handleDesignImage(file: File) {
+    if (designImages.length >= MAX_DESIGN_IMAGES) return;
+    setDesignUploading(true);
+    try {
+      const url = await uploadToStorage(file);
+      setDesignImages((prev) => [...prev, url].slice(0, MAX_DESIGN_IMAGES));
+    } catch {
+      // ignore — optional
+    } finally {
+      setDesignUploading(false);
     }
   }
 
@@ -61,23 +78,33 @@ export function CustomForm() {
     );
   }
 
+  const uploading = sizePhotoUploading || designUploading;
+
   return (
     <form action={action} className="space-y-6">
-      <input type="hidden" name="reference_image" value={image} />
+      <input type="hidden" name="size_photo" value={sizePhoto} />
+      {designImages.map((url) => (
+        <input key={url} type="hidden" name="design_images" value={url} />
+      ))}
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Tu nombre *">
+        <Field label="Nombre y apellidos *">
           <Input name="name" required />
-        </Field>
-        <Field label="Email *">
-          <Input name="email" type="email" required />
         </Field>
         <Field label="Instagram (opcional)">
           <Input name="instagram" placeholder="@tuusuario" />
         </Field>
-        <Field label="Presupuesto (opcional)">
-          <Input name="budget" placeholder="ej. €30–40" />
-        </Field>
+      </div>
+
+      <Field label="Dirección de entrega *">
+        <Input
+          name="address"
+          required
+          placeholder="Calle Ejemplo 2, 10000, Provincia, Comunidad Autónoma"
+        />
+      </Field>
+
+      <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Forma de uña">
           <select name="shape" defaultValue="" className={selectClass}>
             <option value="">Sin preferencia</option>
@@ -88,43 +115,41 @@ export function CustomForm() {
             ))}
           </select>
         </Field>
-        <Field label="Largo">
-          <select name="length" defaultValue="" className={selectClass}>
+        <Field label="Tamaño">
+          <select name="size" defaultValue="" className={selectClass}>
             <option value="">Sin preferencia</option>
-            {LENGTHS.map((l) => (
-              <option key={l} value={l}>
-                {l}
+            {SIZES.map((s) => (
+              <option key={s} value={s}>
+                {s}
               </option>
             ))}
           </select>
         </Field>
       </div>
 
-      <Field label="Tallas">
-        <select name="size_status" defaultValue={SIZE_OPTIONS[0]} className={selectClass}>
-          {SIZE_OPTIONS.map((o) => (
-            <option key={o} value={o}>
-              {o}
-            </option>
-          ))}
-        </select>
+      <Field label="Presupuesto *">
+        <Input name="budget" required placeholder="ej. 30–40 €" />
       </Field>
 
-      <Field label="Describe tu set soñado *">
-        <Textarea
-          name="design"
-          rows={4}
-          required
-          placeholder="Colores, temática, charms, inspiración, ocasión… ¡cuéntamelo todo!"
-        />
-      </Field>
-
-      <Field label="Imagen de referencia (opcional)">
-        <div className="flex items-center gap-4">
-          {image && (
+      <Field label="Tamaño de tus uñas (foto con una moneda)">
+        <p className="text-sm text-muted-foreground">
+          Haz una foto de tu uña junto a una moneda para que pueda calcular la
+          talla, como en el ejemplo.
+        </p>
+        {exampleOk && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={SIZE_EXAMPLE}
+            alt="Ejemplo: uña junto a una moneda"
+            onError={() => setExampleOk(false)}
+            className="mt-1 h-32 w-auto rounded-md border border-border object-cover"
+          />
+        )}
+        <div className="mt-2 flex items-center gap-4">
+          {sizePhoto && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={image}
+              src={sizePhoto}
               alt=""
               className="h-16 w-16 rounded-md border border-border object-cover"
             />
@@ -132,25 +157,73 @@ export function CustomForm() {
           <Input
             type="file"
             accept="image/*"
-            disabled={uploading}
+            disabled={sizePhotoUploading}
             onChange={(e) => {
               const f = e.target.files?.[0];
-              if (f) handleUpload(f);
+              if (f) handleSizePhoto(f);
             }}
           />
         </div>
-        {uploading && (
+        {sizePhotoUploading && (
           <p className="mt-1 text-xs text-muted-foreground">Subiendo…</p>
         )}
       </Field>
 
-      <Field label="¿Algo más? (opcional)">
-        <Textarea name="notes" rows={2} />
+      <Field label={`Diseño — hasta ${MAX_DESIGN_IMAGES} fotos`}>
+        <p className="text-sm text-muted-foreground">
+          Sube imágenes de referencia del diseño que te gustaría.
+        </p>
+        {designImages.length > 0 && (
+          <div className="mt-1 flex flex-wrap gap-3">
+            {designImages.map((url) => (
+              <div key={url} className="relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={url}
+                  alt=""
+                  className="h-20 w-20 rounded-md border border-border object-cover"
+                />
+                <button
+                  type="button"
+                  aria-label="Quitar imagen"
+                  onClick={() =>
+                    setDesignImages((prev) => prev.filter((u) => u !== url))
+                  }
+                  className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-foreground text-xs text-paper"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        {designImages.length < MAX_DESIGN_IMAGES && (
+          <Input
+            type="file"
+            accept="image/*"
+            disabled={designUploading}
+            className="mt-2"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) handleDesignImage(f);
+              e.target.value = "";
+            }}
+          />
+        )}
+        {designUploading && (
+          <p className="mt-1 text-xs text-muted-foreground">Subiendo…</p>
+        )}
       </Field>
 
-      {state?.error && (
-        <p className="text-sm text-destructive">{state.error}</p>
-      )}
+      <Field label="Comentarios (opcional)">
+        <Textarea
+          name="comments"
+          rows={3}
+          placeholder="Colores, temática, charms, ocasión… ¡cuéntamelo todo!"
+        />
+      </Field>
+
+      {state?.error && <p className="text-sm text-destructive">{state.error}</p>}
 
       <Button type="submit" size="lg" disabled={pending || uploading}>
         {pending ? "Enviando…" : "Enviar mi pedido"}

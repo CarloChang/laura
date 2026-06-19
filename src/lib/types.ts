@@ -24,15 +24,14 @@ export type OrderStatus = "new" | "in_progress" | "done" | "archived";
 export interface CustomOrder {
   id: string;
   name: string;
-  email: string;
+  address: string;
   instagram: string | null;
   shape: string | null;
-  length: string | null;
-  size_status: string | null;
-  design: string;
-  reference_image: string | null;
+  size: string | null;
   budget: string | null;
-  notes: string | null;
+  size_photo: string | null;
+  design_images: string[];
+  comments: string | null;
   status: OrderStatus;
   created_at: string;
 }

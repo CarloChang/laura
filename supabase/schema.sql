@@ -54,16 +54,15 @@ create policy "auth write about"
 
 create table if not exists public.custom_orders (
   id              uuid primary key default gen_random_uuid(),
-  name            text not null,
-  email           text not null,
-  instagram       text,
-  shape           text,
-  length          text,
-  size_status     text,
-  design          text not null,
-  reference_image text,
-  budget          text,
-  notes           text,
+  name            text not null,                 -- Nombre y apellidos
+  address         text not null,                 -- Dirección de entrega
+  instagram       text,                          -- IG
+  shape           text,                          -- Forma (Ovalada / Cuadrada)
+  size            text,                          -- Tamaño (Pequeño / Mediano / Largo)
+  budget          text not null,                 -- Presupuesto
+  size_photo      text,                          -- Foto de la uña con una moneda
+  design_images   text[] not null default '{}',  -- Diseño: hasta 3 fotos
+  comments        text,                          -- Comentarios
   status          text not null default 'new'
                   check (status in ('new', 'in_progress', 'done', 'archived')),
   created_at      timestamptz not null default now()

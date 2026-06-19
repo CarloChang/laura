@@ -15,24 +15,29 @@ export async function submitOrder(
   }
 
   const name = String(formData.get("name") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const design = String(formData.get("design") ?? "").trim();
+  const address = String(formData.get("address") ?? "").trim();
+  const budget = String(formData.get("budget") ?? "").trim();
 
-  if (!name || !email || !design) {
-    return { error: "Rellena tu nombre, email e idea de diseño." };
+  if (!name || !address || !budget) {
+    return { error: "Rellena tu nombre, la dirección de entrega y el presupuesto." };
   }
+
+  const designImages = formData
+    .getAll("design_images")
+    .map((v) => String(v).trim())
+    .filter(Boolean)
+    .slice(0, 3);
 
   const row = {
     name,
-    email,
+    address,
     instagram: String(formData.get("instagram") ?? "").trim() || null,
     shape: String(formData.get("shape") ?? "").trim() || null,
-    length: String(formData.get("length") ?? "").trim() || null,
-    size_status: String(formData.get("size_status") ?? "").trim() || null,
-    design,
-    reference_image: String(formData.get("reference_image") ?? "").trim() || null,
-    budget: String(formData.get("budget") ?? "").trim() || null,
-    notes: String(formData.get("notes") ?? "").trim() || null,
+    size: String(formData.get("size") ?? "").trim() || null,
+    budget,
+    size_photo: String(formData.get("size_photo") ?? "").trim() || null,
+    design_images: designImages,
+    comments: String(formData.get("comments") ?? "").trim() || null,
   };
 
   const supabase = await createClient();

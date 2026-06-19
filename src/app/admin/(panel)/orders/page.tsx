@@ -59,39 +59,48 @@ export default async function OrdersPage() {
                     </span>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    <a href={`mailto:${o.email}`} className="hover:text-terracotta">
-                      {o.email}
-                    </a>
-                    {o.instagram && ` · ${o.instagram}`}
-                    {" · "}
+                    {o.instagram && `${o.instagram} · `}
                     {new Date(o.created_at).toLocaleDateString()}
                   </p>
                 </div>
-                {o.reference_image && (
+                {o.size_photo && (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={o.reference_image}
-                    alt="reference"
+                    src={o.size_photo}
+                    alt="size reference"
                     className="h-20 w-20 rounded-md border border-border object-cover"
                   />
                 )}
               </div>
 
               <dl className="mt-4 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2">
+                <Detail label="Address" value={o.address} />
                 <Detail label="Shape" value={o.shape} />
-                <Detail label="Length" value={o.length} />
-                <Detail label="Sizing" value={o.size_status} />
+                <Detail label="Size" value={o.size} />
                 <Detail label="Budget" value={o.budget} />
               </dl>
 
-              <p className="mt-3 whitespace-pre-line text-sm">
-                <span className="font-semibold">Design: </span>
-                {o.design}
-              </p>
-              {o.notes && (
-                <p className="mt-2 whitespace-pre-line text-sm text-muted-foreground">
-                  <span className="font-semibold">Notes: </span>
-                  {o.notes}
+              {o.design_images.length > 0 && (
+                <div className="mt-3">
+                  <p className="text-sm font-semibold">Design references:</p>
+                  <div className="mt-1 flex flex-wrap gap-2">
+                    {o.design_images.map((url) => (
+                      <a key={url} href={url} target="_blank" rel="noreferrer">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={url}
+                          alt="design reference"
+                          className="h-20 w-20 rounded-md border border-border object-cover"
+                        />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {o.comments && (
+                <p className="mt-3 whitespace-pre-line text-sm text-muted-foreground">
+                  <span className="font-semibold">Comments: </span>
+                  {o.comments}
                 </p>
               )}
 
