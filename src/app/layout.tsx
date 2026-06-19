@@ -41,7 +41,10 @@ export default function RootLayout({
       lang="es"
       className={`${inter.variable} ${dmSerif.variable} ${anton.variable} ${caveat.variable} h-full`}
     >
-      <body className="grain min-h-full flex flex-col">
+      <body
+        className="grain min-h-full flex flex-col"
+        suppressHydrationWarning
+      >
         {children}
         <Toaster />
       </body>
