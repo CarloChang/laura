@@ -19,17 +19,17 @@ export default async function Home() {
         <Hero />
         <ProductSection
           id="nails"
-          kicker="Shop the look"
-          title="Press-on nails"
+          kicker="Consigue el look"
+          title="Press-ons"
           script="hecho a medida"
           products={nails}
         />
         <About sections={about} />
         <ProductSection
           id="beauty"
-          kicker="Curated beauty"
-          title="Makeup & more"
-          script="vintage vibes"
+          kicker="Belleza seleccionada"
+          title="Maquillaje y más"
+          script="vibras vintage"
           products={makeup}
         />
       </main>

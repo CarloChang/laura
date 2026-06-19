@@ -4,16 +4,16 @@ import { Footer } from "@/components/site/footer";
 import { CustomForm } from "@/components/site/custom-form";
 
 export const metadata: Metadata = {
-  title: "Custom Nails — Laura",
+  title: "Press-ons personalizados — Laura",
   description:
-    "Request a fully custom press-on nail set, made to measure just for you.",
+    "Pide un set de press-ons totalmente personalizado, hecho a tu medida.",
 };
 
 const STEPS = [
-  "Tell me your design dream & sizing below.",
-  "I confirm availability, price and timing within 24h.",
-  "You pay and I handcraft your set.",
-  "It ships — usually in 7–14 days. 💅",
+  "Cuéntame tu diseño soñado y tu talla aquí abajo.",
+  "Confirmo disponibilidad, precio y tiempos en menos de 24h.",
+  "Pagas y elaboro tu set a mano.",
+  "Se envía — normalmente en 7–14 días. 💅",
 ];
 
 export default function CustomPage() {
@@ -24,15 +24,15 @@ export default function CustomPage() {
         <section className="border-b border-border">
           <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
             <span className="script text-5xl text-terracotta sm:text-6xl">
-              made just for you
+              hecho solo para ti
             </span>
             <h1 className="mt-2 font-condensed text-6xl uppercase leading-none sm:text-7xl">
-              Custom nails
+              Press-ons custom
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-              Dreaming of a set that doesn&apos;t exist yet? Pick your shape,
-              length and design and I&apos;ll handcraft it from scratch. Fill in
-              the form and I&apos;ll be in touch.
+              ¿Sueñas con un set que todavía no existe? Elige tu forma, largo y
+              diseño y lo elaboro a mano desde cero. Rellena el formulario y me
+              pongo en contacto contigo.
             </p>
           </div>
         </section>

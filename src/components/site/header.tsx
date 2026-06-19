@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 const NAV = [
-  { label: "Nails", href: "/#nails" },
-  { label: "Beauty", href: "/#beauty" },
-  { label: "Custom", href: "/custom" },
-  { label: "Where to start", href: "/#start" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Uñas", href: "/#nails" },
+  { label: "Belleza", href: "/#beauty" },
+  { label: "Personalizadas", href: "/custom" },
+  { label: "Cómo empezar", href: "/#start" },
+  { label: "Contacto", href: "/#contact" },
 ];
 
 export function Header() {
@@ -31,9 +31,9 @@ export function Header() {
         </nav>
         <Link
           href="/custom"
-          className="rounded-full border border-ink bg-ink px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-terracotta hover:border-terracotta"
+          className="border border-ink bg-ink px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-terracotta hover:border-terracotta"
         >
-          Custom order
+          Pedido custom
         </Link>
       </div>
     </header>

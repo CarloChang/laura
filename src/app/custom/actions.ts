@@ -9,7 +9,9 @@ export async function submitOrder(
   formData: FormData,
 ): Promise<OrderState> {
   if (!isSupabaseConfigured) {
-    return { error: "The order form isn't connected yet. Please try again later." };
+    return {
+      error: "El formulario aún no está conectado. Inténtalo de nuevo más tarde.",
+    };
   }
 
   const name = String(formData.get("name") ?? "").trim();
@@ -17,7 +19,7 @@ export async function submitOrder(
   const design = String(formData.get("design") ?? "").trim();
 
   if (!name || !email || !design) {
-    return { error: "Please fill in your name, email and design idea." };
+    return { error: "Rellena tu nombre, email e idea de diseño." };
   }
 
   const row = {
@@ -37,7 +39,9 @@ export async function submitOrder(
   const { error } = await supabase.from("custom_orders").insert(row);
   if (error) {
     console.error("submitOrder:", error.message);
-    return { error: "Something went wrong sending your request. Please try again." };
+    return {
+      error: "Algo salió mal al enviar tu pedido. Inténtalo de nuevo.",
+    };
   }
 
   return { ok: true };

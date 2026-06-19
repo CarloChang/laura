@@ -8,12 +8,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-const SHAPES = ["Almond", "Coffin", "Square", "Squoval", "Stiletto", "Round"];
-const LENGTHS = ["Short", "Medium", "Long", "Extra long"];
+const SHAPES = ["Almendra", "Coffin", "Cuadrada", "Squoval", "Stiletto", "Redonda"];
+const LENGTHS = ["Corto", "Medio", "Largo", "Extra largo"];
 const SIZE_OPTIONS = [
-  "I know my sizes",
-  "Send me a sizing kit first",
-  "Not sure / need help",
+  "Conozco mis tallas",
+  "Envíame primero un kit de medidas",
+  "No estoy segura / necesito ayuda",
 ];
 
 const selectClass =
@@ -50,10 +50,12 @@ export function CustomForm() {
     return (
       <div className="rounded-lg border border-border bg-card p-10 text-center">
         <p className="script text-5xl text-terracotta">¡gracias!</p>
-        <h2 className="mt-2 font-condensed text-4xl uppercase">Request sent</h2>
+        <h2 className="mt-2 font-condensed text-4xl uppercase">
+          Pedido enviado
+        </h2>
         <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-          Thank you! I&apos;ve got your custom request and I&apos;ll get back to
-          you within 24h to confirm details and timing. 💅
+          ¡Gracias! He recibido tu pedido personalizado y te contestaré en menos
+          de 24h para confirmar los detalles y los tiempos. 💅
         </p>
       </div>
     );
@@ -64,21 +66,21 @@ export function CustomForm() {
       <input type="hidden" name="reference_image" value={image} />
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Your name *">
+        <Field label="Tu nombre *">
           <Input name="name" required />
         </Field>
         <Field label="Email *">
           <Input name="email" type="email" required />
         </Field>
-        <Field label="Instagram (optional)">
-          <Input name="instagram" placeholder="@yourhandle" />
+        <Field label="Instagram (opcional)">
+          <Input name="instagram" placeholder="@tuusuario" />
         </Field>
-        <Field label="Budget (optional)">
-          <Input name="budget" placeholder="e.g. €30–40" />
+        <Field label="Presupuesto (opcional)">
+          <Input name="budget" placeholder="ej. €30–40" />
         </Field>
-        <Field label="Nail shape">
+        <Field label="Forma de uña">
           <select name="shape" defaultValue="" className={selectClass}>
-            <option value="">No preference</option>
+            <option value="">Sin preferencia</option>
             {SHAPES.map((s) => (
               <option key={s} value={s}>
                 {s}
@@ -86,9 +88,9 @@ export function CustomForm() {
             ))}
           </select>
         </Field>
-        <Field label="Length">
+        <Field label="Largo">
           <select name="length" defaultValue="" className={selectClass}>
-            <option value="">No preference</option>
+            <option value="">Sin preferencia</option>
             {LENGTHS.map((l) => (
               <option key={l} value={l}>
                 {l}
@@ -98,7 +100,7 @@ export function CustomForm() {
         </Field>
       </div>
 
-      <Field label="Sizing">
+      <Field label="Tallas">
         <select name="size_status" defaultValue={SIZE_OPTIONS[0]} className={selectClass}>
           {SIZE_OPTIONS.map((o) => (
             <option key={o} value={o}>
@@ -108,16 +110,16 @@ export function CustomForm() {
         </select>
       </Field>
 
-      <Field label="Describe your dream set *">
+      <Field label="Describe tu set soñado *">
         <Textarea
           name="design"
           rows={4}
           required
-          placeholder="Colours, theme, charms, inspiration, occasion… tell me everything!"
+          placeholder="Colores, temática, charms, inspiración, ocasión… ¡cuéntamelo todo!"
         />
       </Field>
 
-      <Field label="Reference image (optional)">
+      <Field label="Imagen de referencia (opcional)">
         <div className="flex items-center gap-4">
           {image && (
             // eslint-disable-next-line @next/next/no-img-element
@@ -138,11 +140,11 @@ export function CustomForm() {
           />
         </div>
         {uploading && (
-          <p className="mt-1 text-xs text-muted-foreground">Uploading…</p>
+          <p className="mt-1 text-xs text-muted-foreground">Subiendo…</p>
         )}
       </Field>
 
-      <Field label="Anything else? (optional)">
+      <Field label="¿Algo más? (opcional)">
         <Textarea name="notes" rows={2} />
       </Field>
 
@@ -151,7 +153,7 @@ export function CustomForm() {
       )}
 
       <Button type="submit" size="lg" disabled={pending || uploading}>
-        {pending ? "Sending…" : "Send my request"}
+        {pending ? "Enviando…" : "Enviar mi pedido"}
       </Button>
     </form>
   );

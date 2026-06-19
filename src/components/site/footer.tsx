@@ -15,22 +15,22 @@ export function Footer() {
           <div>
             <p className="script text-4xl text-blush">¿hablamos?</p>
             <h2 className="mt-2 font-condensed text-5xl uppercase leading-none text-paper sm:text-6xl">
-              Order &amp; contact
+              Pedidos y contacto
             </h2>
             <p className="mt-4 max-w-sm text-paper/70">
-              Got a question or a dream design? Message me on Instagram or drop
-              an email — I reply within 24h.
+              ¿Tienes una duda o un diseño soñado? Escríbeme por Instagram o al
+              correo — respondo en menos de 24h.
             </p>
             <a
               href="mailto:hello@laura.com"
-              className="mt-6 inline-block rounded-full bg-terracotta px-6 py-3 text-sm font-semibold uppercase tracking-wide text-paper transition-opacity hover:opacity-90"
+              className="mt-6 inline-block bg-terracotta px-6 py-3 text-sm font-semibold uppercase tracking-wide text-paper transition-opacity hover:opacity-90"
             >
               hello@laura.com
             </a>
           </div>
           <div className="flex flex-col gap-3 md:items-end md:text-right">
             <p className="text-xs uppercase tracking-widest text-paper/50">
-              Follow along
+              Sígueme
             </p>
             {SOCIALS.map((s) => (
               <a
@@ -46,7 +46,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-14 flex flex-col items-center justify-between gap-2 border-t border-paper/15 pt-6 text-xs text-paper/50 sm:flex-row">
-          <span>© {new Date().getFullYear()} Laura — Press-on Nails &amp; Beauty</span>
+          <span>© {new Date().getFullYear()} Laura — Press-ons y belleza</span>
           <span>Hecho a mano con cariño</span>
         </div>
       </div>

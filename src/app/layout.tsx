@@ -26,9 +26,9 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Laura — Press-on Nails & Beauty",
+  title: "Laura — Press-ons y belleza",
   description:
-    "Handmade press-on nail sets and curated beauty, made with love. Custom designs, vintage-inspired.",
+    "Sets de press-ons hechos a mano y belleza seleccionada, con cariño. Diseños personalizados de inspiración vintage.",
 };
 
 export default function RootLayout({
@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${inter.variable} ${dmSerif.variable} ${anton.variable} ${caveat.variable} h-full`}
     >
       <body className="grain min-h-full flex flex-col">

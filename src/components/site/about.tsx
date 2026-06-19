@@ -10,10 +10,10 @@ export function About({ sections }: { sections: AboutSection[] }) {
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
         <div className="mb-14 text-center">
           <span className="script text-5xl text-terracotta sm:text-6xl">
-            where to start
+            cómo empezar
           </span>
           <p className="mt-3 text-sm uppercase tracking-widest text-muted-foreground">
-            everything you need to know before you order
+            todo lo que necesitas saber antes de pedir
           </p>
         </div>
 
