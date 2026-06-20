@@ -25,6 +25,9 @@ export default function PanelLayout({
               <Link href="/admin/orders" className="hover:text-terracotta">
                 Requests
               </Link>
+              <Link href="/admin/about" className="hover:text-terracotta">
+                Content
+              </Link>
             </nav>
           </div>
           <div className="flex items-center gap-1 sm:gap-3">

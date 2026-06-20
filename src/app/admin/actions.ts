@@ -26,19 +26,31 @@ export async function saveProduct(formData: FormData) {
   const supabase = await createClient();
 
   const id = formData.get("id") as string | null;
+  const category = String(formData.get("category") ?? "nails") as Category;
   const row = {
     name: String(formData.get("name") ?? ""),
     price: String(formData.get("price") ?? ""),
     image: String(formData.get("image") ?? ""),
     description: String(formData.get("description") ?? "") || null,
-    category: (String(formData.get("category") ?? "nails") as Category),
+    category,
     sold_out: formData.get("sold_out") === "on",
-    sort_order: Number(formData.get("sort_order") ?? 0),
   };
 
-  const { error } = id
-    ? await supabase.from("products").update(row).eq("id", id)
-    : await supabase.from("products").insert(row);
+  let error;
+  if (id) {
+    // Editing: leave sort_order untouched so the product keeps its position.
+    ({ error } = await supabase.from("products").update(row).eq("id", id));
+  } else {
+    // New product: append to the end of its category.
+    const { data: last } = await supabase
+      .from("products")
+      .select("sort_order")
+      .order("sort_order", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    const sort_order = (last?.sort_order ?? -1) + 1;
+    ({ error } = await supabase.from("products").insert({ ...row, sort_order }));
+  }
 
   if (error) throw new Error(error.message);
 
@@ -72,6 +84,27 @@ export async function saveProductOrder(orderedIds: string[]) {
 
   revalidatePath("/");
   revalidatePath("/admin");
+}
+
+export async function saveAboutSection(input: {
+  id: string;
+  title: string;
+  text: string;
+  images: string[];
+}) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("about_sections")
+    .update({
+      title: input.title,
+      text: input.text,
+      images: input.images,
+    })
+    .eq("id", input.id);
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/");
+  revalidatePath("/admin/about");
 }
 
 export async function updateOrderStatus(formData: FormData) {

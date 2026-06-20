@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { ImageLightbox } from "@/components/admin/image-lightbox";
 import type { Product } from "@/lib/types";
 
 export function ProductForm({ product }: { product?: Product }) {
@@ -93,12 +94,7 @@ export function ProductForm({ product }: { product?: Product }) {
         <Label>Image</Label>
         <div className="flex items-center gap-4">
           {image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={image}
-              alt=""
-              className="h-20 w-20 rounded-md border border-border object-cover"
-            />
+            <ImageLightbox src={image} alt="Product image" />
           ) : (
             <div className="flex h-20 w-20 items-center justify-center rounded-md border border-dashed border-border text-xs text-muted-foreground">
               none
@@ -119,26 +115,15 @@ export function ProductForm({ product }: { product?: Product }) {
         )}
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-1.5">
-          <Label htmlFor="sort_order">Sort order</Label>
-          <Input
-            id="sort_order"
-            name="sort_order"
-            type="number"
-            defaultValue={product?.sort_order ?? 0}
-          />
-        </div>
-        <label className="flex items-end gap-2 pb-2">
-          <input
-            type="checkbox"
-            name="sold_out"
-            defaultChecked={product?.sold_out}
-            className="size-4"
-          />
-          <span className="text-sm">Sold out</span>
-        </label>
-      </div>
+      <label className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          name="sold_out"
+          defaultChecked={product?.sold_out}
+          className="size-4"
+        />
+        <span className="text-sm">Sold out</span>
+      </label>
 
       {error && <p className="text-sm text-destructive">{error}</p>}
 
