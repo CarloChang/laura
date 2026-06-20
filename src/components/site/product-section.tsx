@@ -15,11 +15,11 @@ export function ProductSection({ id, kicker, title, script, products }: Props) {
     <section id={id} className="relative scroll-mt-20 overflow-hidden">
       {/* fixed to the viewport: the image stays put while products scroll over it */}
       <div
-        className="absolute inset-0 -z-10 bg-cover bg-fixed bg-center"
+        className="absolute inset-0 -z-10 bg-cover bg-center bg-scroll md:bg-fixed"
         style={{ backgroundImage: "url(/product-section.jpg)" }}
       />
       {/* just the fade — image dissolves into the page, no side veil */}
-      <div className="absolute inset-0 -z-10 bg-linear-to-b from-background via-background/10 to-background" />
+      <div className="absolute inset-0 -z-10 bg-linear-to-b from-background via-background/20 to-background" />
 
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
