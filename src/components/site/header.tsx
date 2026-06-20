@@ -14,9 +14,9 @@ export function Header() {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
-          className="font-condensed text-2xl uppercase tracking-tight"
+          className="font-condensed text-2xl tracking-tight"
         >
-          Laura<span className="text-terracotta">.</span>
+          laura<span className="text-terracotta">.</span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex">
           {NAV.map((item) => (

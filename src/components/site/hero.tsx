@@ -19,8 +19,8 @@ export function Hero() {
           <p className="mb-4 inline-block border border-ink/30 bg-paper/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-foreground/70 backdrop-blur-sm">
             Personalizadas · hechas a mano
           </p>
-          <h1 className="font-condensed text-6xl uppercase leading-[1.02] sm:text-7xl lg:text-8xl">
-            Deja que tus
+          <h1 className="font-condensed text-6xl leading-[1.02] sm:text-7xl lg:text-8xl">
+            deja que tus
             <br />
             uñas
             <br />
