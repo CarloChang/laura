@@ -12,14 +12,23 @@ interface Props {
 export function ProductSection({ id, kicker, title, script, products }: Props) {
   if (products.length === 0) return null;
   return (
-    <section id={id} className="relative scroll-mt-20 overflow-hidden">
-      {/* fixed to the viewport: the image stays put while products scroll over it */}
-      <div
-        className="absolute inset-0 -z-10 bg-cover bg-center bg-scroll md:bg-fixed"
-        style={{ backgroundImage: "url(/product-section.jpg)" }}
-      />
-      {/* just the fade — image dissolves into the page, no side veil */}
-      <div className="absolute inset-0 -z-10 bg-linear-to-b from-background via-background/20 to-background" />
+    <section id={id} className="relative scroll-mt-20">
+      {/*
+        Per-section background pinned to the viewport. We use a sticky element
+        instead of `background-attachment: fixed` because the latter renders
+        zoomed/blurry on iOS Safari. The sticky window stays put while the
+        products scroll over it, and is naturally clipped to this section.
+      */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="sticky top-0 h-screen w-full overflow-hidden">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: "url(/product-section.jpg)" }}
+          />
+          {/* just the fade — image dissolves into the page, no side veil */}
+          <div className="absolute inset-0 bg-linear-to-b from-background via-background/20 to-background" />
+        </div>
+      </div>
 
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
