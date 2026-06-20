@@ -27,15 +27,20 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </div>
         <div className="mt-3 flex items-baseline justify-between gap-2">
-          <h3 className="font-display text-lg leading-tight">{product.name}</h3>
+          <h3 className="font-display text-lg leading-tight text-[#000]">
+            {product.name}
+          </h3>
           <span className="shrink-0 font-medium text-terracotta">
             {product.price}
           </span>
         </div>
       </DialogTrigger>
 
-      <DialogContent className="overflow-hidden p-0 sm:max-w-md">
-        <div className="relative aspect-square w-full bg-card">
+      <DialogContent
+        showCloseButton={false}
+        className="overflow-hidden bg-[#88ab72] p-0 sm:max-w-md"
+      >
+        <div className="relative m-4 aspect-square overflow-hidden rounded-lg bg-card shadow-md">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={product.image}
@@ -50,24 +55,18 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
         <div className="p-6">
           <div className="flex items-baseline justify-between gap-3">
-            <DialogTitle className="font-display text-2xl leading-tight">
+            <DialogTitle className="font-display text-2xl leading-tight text-[#953553]">
               {product.name}
             </DialogTitle>
-            <span className="shrink-0 text-lg font-medium text-terracotta">
+            <span className="shrink-0 text-lg font-medium text-[#953553]">
               {product.price}
             </span>
           </div>
           {product.description && (
-            <DialogDescription className="mt-3 leading-relaxed">
+            <DialogDescription className="mt-3 leading-relaxed text-[#000]">
               {product.description}
             </DialogDescription>
           )}
-          <a
-            href="/custom"
-            className="mt-6 inline-block bg-ink px-6 py-3 text-sm font-semibold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-terracotta"
-          >
-            Pídelo
-          </a>
         </div>
       </DialogContent>
     </Dialog>

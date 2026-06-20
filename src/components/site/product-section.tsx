@@ -36,7 +36,7 @@ export function ProductSection({ id, kicker, title, script, products }: Props) {
           <p className="text-xs font-semibold uppercase tracking-widest text-terracotta">
             {kicker}
           </p>
-          <h2 className="font-condensed text-5xl uppercase leading-none sm:text-6xl">
+          <h2 className="font-ballet text-6xl leading-none sm:text-6xl">
             {title}
           </h2>
         </div>

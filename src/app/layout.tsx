@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, DM_Serif_Display, Anton, Caveat } from "next/font/google";
+import {
+  Inter,
+  DM_Serif_Display,
+  Anton,
+  Caveat,
+  Bitcount_Ink,
+  Playfair_Display,
+  Ballet,
+} from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -25,6 +33,21 @@ const caveat = Caveat({
   subsets: ["latin"],
 });
 
+const bitcount = Bitcount_Ink({
+  variable: "--font-bitcount",
+  subsets: ["latin"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
+const ballet = Ballet({
+  variable: "--font-ballet",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Laura — Press-ons y belleza",
   description:
@@ -39,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${inter.variable} ${dmSerif.variable} ${anton.variable} ${caveat.variable} h-full`}
+      className={`${inter.variable} ${dmSerif.variable} ${anton.variable} ${caveat.variable} ${bitcount.variable} ${playfair.variable} ${ballet.variable} h-full`}
     >
       <body
         className="grain min-h-full flex flex-col"

@@ -19,9 +19,9 @@ export default async function Home() {
         <Hero />
         <ProductSection
           id="nails"
-          kicker="Consigue el look"
-          title="Press-ons"
-          script="hecho a medida"
+          kicker=""
+          title="Hechas a medida"
+          script=""
           products={nails}
         />
         <About sections={about} />

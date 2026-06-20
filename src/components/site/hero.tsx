@@ -19,12 +19,10 @@ export function Hero() {
           <p className="mb-4 inline-block border border-ink/30 bg-paper/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-foreground/70 backdrop-blur-sm">
             Personalizadas · hechas a mano
           </p>
-          <h1 className="font-condensed text-6xl leading-[1.02] sm:text-7xl lg:text-8xl">
-            deja que tus
+          <h1 className="font-bitcount text-6xl leading-[1.02] sm:text-7xl lg:text-8xl">
+            Press ons
             <br />
-            uñas
-            <br />
-            <span className="text-terracotta">hablen por ti.</span>
+            <span className="font-playfair text-4xl text-terracotta">@lauu.muaa</span>
           </h1>
           <p className="mt-6 max-w-md text-base text-foreground/80">
             Sets de press-ons personalizados y belleza vintage cuidadosamente
