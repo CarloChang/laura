@@ -13,7 +13,7 @@ export interface ColorToken {
   /** CSS custom properties this color drives (without the leading `--`). */
   vars: string[];
   default: string;
-  group: "Core" | "Brand";
+  group: "Core" | "Brand" | "Card";
 }
 
 export interface FontRole {
@@ -44,6 +44,11 @@ export const COLOR_TOKENS: ColorToken[] = [
   { key: "blush", label: "Blush", vars: ["blush"], default: "#e7b9a6", group: "Brand" },
   { key: "paper", label: "Paper", vars: ["paper"], default: "#f5efe3", group: "Brand" },
   { key: "ink", label: "Ink", vars: ["ink"], default: "#1f1b16", group: "Brand" },
+
+  // Product detail popup (the open product card)
+  { key: "pcard-bg", label: "Popup background", vars: ["pcard-bg"], default: "#c5e1a5", group: "Card" },
+  { key: "pcard-accent", label: "Name & price", vars: ["pcard-accent"], default: "#953553", group: "Card" },
+  { key: "pcard-text", label: "Description & labels", vars: ["pcard-text"], default: "#000000", group: "Card" },
 ];
 
 export const FONT_ROLES: FontRole[] = [

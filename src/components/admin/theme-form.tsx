@@ -9,8 +9,8 @@ import {
   type ThemeSettings,
 } from "@/lib/theme";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 const HEX_RE = /^#[0-9a-fA-F]{6}$/;
 
@@ -59,11 +59,13 @@ export function ThemeForm({ settings }: { settings: ThemeSettings }) {
 
   const core = COLOR_TOKENS.filter((t) => t.group === "Core");
   const brand = COLOR_TOKENS.filter((t) => t.group === "Brand");
+  const card = COLOR_TOKENS.filter((t) => t.group === "Card");
 
   return (
     <div className="space-y-6">
       <ColorSection title="Core colors" tokens={core} values={values} set={set} />
       <ColorSection title="Brand accents" tokens={brand} values={values} set={set} />
+      <ColorSection title="Product card popup" tokens={card} values={values} set={set} />
 
       <section className="space-y-4 rounded-lg border border-border bg-card p-5">
         <div>
@@ -165,7 +167,8 @@ function ColorRow({
           onChange={(e) => onChange(e.target.value)}
           className="h-8 w-10 shrink-0 cursor-pointer rounded-md border border-input bg-transparent p-0.5"
         />
-        <Input
+        <input
+          type="text"
           value={value}
           aria-invalid={!valid}
           spellCheck={false}
@@ -174,7 +177,10 @@ function ColorRow({
             if (v && !v.startsWith("#")) v = `#${v}`;
             onChange(v);
           }}
-          className="font-mono"
+          className={cn(
+            "h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 font-mono text-sm outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
+            !valid && "border-destructive ring-3 ring-destructive/20",
+          )}
         />
       </div>
     </div>

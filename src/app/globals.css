@@ -59,6 +59,11 @@
   --fs-title: 1;
   --fs-script: 1;
 
+  /* product detail popup colors (edited from /admin/appearance) */
+  --pcard-bg: #c5e1a5;
+  --pcard-accent: #953553;
+  --pcard-text: #000000;
+
   /* raw brand palette */
   --paper: #f5efe3;
   --ink: #1f1b16;
