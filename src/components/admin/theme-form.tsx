@@ -19,6 +19,15 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
 const HEX_RE = /^#[0-9a-fA-F]{6}$/;
+const HEX_SHORT_RE = /^#([0-9a-fA-F]{3})$/;
+
+/** Expands 3-digit hex (#abc → #aabbcc) so the 6-digit validator accepts it. */
+function normalizeHex(value: string): string {
+  const m = HEX_SHORT_RE.exec(value.trim());
+  if (!m) return value;
+  const [r, g, b] = m[1];
+  return `#${r}${r}${g}${g}${b}${b}`;
+}
 
 /** Keys whose values must be valid hex colors. */
 const COLOR_KEYS = new Set<string>([
@@ -56,10 +65,10 @@ const ELEMENT_FONT_BY_TEXT = new Map(
 /** Builds the full value map from saved settings, falling back to defaults. */
 function withDefaults(settings: ThemeSettings): ThemeSettings {
   const out: ThemeSettings = {};
-  for (const t of COLOR_TOKENS) out[t.key] = settings[t.key] ?? t.default;
+  for (const t of COLOR_TOKENS) out[t.key] = normalizeHex(settings[t.key] ?? t.default);
   for (const f of FONT_ROLES) out[f.key] = settings[f.key] ?? String(f.default);
   for (const t of TEXT_FIELDS) out[t.key] = settings[t.key] ?? t.default;
-  for (const e of ELEMENT_COLORS) out[e.key] = settings[e.key] ?? defaultFor(e.key);
+  for (const e of ELEMENT_COLORS) out[e.key] = normalizeHex(settings[e.key] ?? defaultFor(e.key));
   for (const e of ELEMENT_FONTS) out[e.key] = settings[e.key] ?? defaultFor(e.key);
   return out;
 }

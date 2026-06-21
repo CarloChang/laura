@@ -39,7 +39,8 @@ export async function Header() {
         </nav>
         <Link
           href="/custom"
-          className="border border-ink bg-ink px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-primary-foreground transition-colors hover:bg-terracotta hover:border-terracotta"
+          className="border border-ink bg-ink px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-(--c-header-cta) transition-colors hover:bg-terracotta hover:border-terracotta"
+          style={{ fontFamily: "var(--ef-header-cta)" }}
         >
           {cta}
         </Link>

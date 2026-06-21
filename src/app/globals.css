@@ -65,6 +65,7 @@
   /* per-element font families (edited from /admin/appearance) — each element's
      original font; overrides are emitted at :root:root by buildThemeCss. */
   --ef-logo: var(--font-playfair), ui-serif, Georgia, serif;
+  --ef-header-cta: var(--ff-body);
   --ef-hero-badge: var(--ff-body);
   --ef-hero-title: var(--font-bitcount), system-ui;
   --ef-hero-subtitle: var(--font-playfair), ui-serif, Georgia, serif;
@@ -96,6 +97,7 @@
 
   /* per-headline text colors — inherit a palette token until overridden */
   --c-logo: var(--foreground);
+  --c-header-cta: var(--paper);
   --c-hero-badge: color-mix(in srgb, var(--foreground) 70%, transparent);
   /* matches the Bitcount Ink color palette so iOS (no COLRv1) falls back to purple, not black */
   --c-hero-title: #9c3fc4;

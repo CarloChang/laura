@@ -216,6 +216,7 @@ export const TEXT_FIELDS: TextField[] = [
  */
 export const ELEMENT_COLORS: ElementColor[] = [
   { key: "c-logo", textKey: "header-logo", fallback: "foreground" },
+  { key: "c-header-cta", textKey: "header-cta", fallback: "paper" },
   { key: "c-hero-badge", textKey: "hero-badge", fallback: "foreground" },
   { key: "c-hero-title", textKey: "hero-title", fallback: "foreground" },
   { key: "c-hero-subtitle", textKey: "hero-subtitle", fallback: "terracotta" },
@@ -249,6 +250,7 @@ export function elementColorDefault(key: string): string {
  */
 export const ELEMENT_FONTS: ElementFont[] = [
   { key: "ef-logo", textKey: "header-logo", default: "playfair" },
+  { key: "ef-header-cta", textKey: "header-cta", default: "inter" },
   { key: "ef-hero-badge", textKey: "hero-badge", default: "inter" },
   { key: "ef-hero-title", textKey: "hero-title", default: "bitcount" },
   { key: "ef-hero-subtitle", textKey: "hero-subtitle", default: "playfair" },
