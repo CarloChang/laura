@@ -28,6 +28,9 @@ export default async function Home() {
           kickerColor="var(--c-nails-kicker)"
           titleColor="var(--c-nails-title)"
           scriptColor="var(--c-nails-script)"
+          kickerFont="var(--ef-nails-kicker)"
+          titleFont="var(--ef-nails-title)"
+          scriptFont="var(--ef-nails-script)"
           products={nails}
         />
         <About sections={about} />
@@ -39,6 +42,9 @@ export default async function Home() {
           kickerColor="var(--c-beauty-kicker)"
           titleColor="var(--c-beauty-title)"
           scriptColor="var(--c-beauty-script)"
+          kickerFont="var(--ef-beauty-kicker)"
+          titleFont="var(--ef-beauty-title)"
+          scriptFont="var(--ef-beauty-script)"
           products={makeup}
         />
       </main>

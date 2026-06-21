@@ -25,22 +25,31 @@ export async function Hero() {
       <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-20 sm:px-6 md:grid-cols-2 md:py-28">
         {/* copy */}
         <div className="relative z-10">
-          <p className="mb-4 inline-block border border-ink/30 bg-paper/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-(--c-hero-badge) backdrop-blur-sm">
+          <p
+            className="mb-4 inline-block border border-ink/30 bg-paper/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-(--c-hero-badge) backdrop-blur-sm"
+            style={{ fontFamily: "var(--ef-hero-badge)" }}
+          >
             {badge}
           </p>
-          <h1 className="font-bitcount text-[calc(3.75rem*var(--fs-title))] leading-[1.02] text-(--c-hero-title) sm:text-[calc(4.5rem*var(--fs-title))] lg:text-[calc(6rem*var(--fs-title))]">
+          <h1
+            className="font-bitcount text-[calc(3.75rem*var(--fs-title))] leading-[1.02] text-(--c-hero-title) sm:text-[calc(4.5rem*var(--fs-title))] lg:text-[calc(6rem*var(--fs-title))]"
+            style={{ fontFamily: "var(--ef-hero-title)" }}
+          >
             {title}
             <br />
-            <span className="font-playfair text-[calc(2.25rem*var(--fs-heading))] text-(--c-hero-subtitle)">{subtitle}</span>
+            <span
+              className="font-playfair text-[calc(2.25rem*var(--fs-heading))] text-(--c-hero-subtitle)"
+              style={{ fontFamily: "var(--ef-hero-subtitle)" }}
+            >
+              {subtitle}
+            </span>
           </h1>
-          <p className="mt-6 max-w-md text-base text-(--c-hero-text)">{text}</p>
-        </div>
-
-        {/* script accent sits over the faded orchid on the right */}
-        <div className="relative hidden h-64 md:block">
-          <span className="script absolute bottom-4 right-6 rotate-[-6deg] text-[calc(3rem*var(--fs-script))] text-terracotta lg:text-[calc(3.75rem*var(--fs-script))]">
-            hecho a mano
-          </span>
+          <p
+            className="mt-6 max-w-md text-base text-(--c-hero-text)"
+            style={{ fontFamily: "var(--ef-hero-text)" }}
+          >
+            {text}
+          </p>
         </div>
       </div>
     </section>

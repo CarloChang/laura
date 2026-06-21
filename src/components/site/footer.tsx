@@ -19,19 +19,29 @@ export async function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="grid gap-10 md:grid-cols-2">
           <div>
-            <p className="script text-[calc(2.25rem*var(--fs-script))] text-(--c-footer-script)">
+            <p
+              className="script text-[calc(2.25rem*var(--fs-script))] text-(--c-footer-script)"
+              style={{ fontFamily: "var(--ef-footer-script)" }}
+            >
               {textValue(settings, "footer-script")}
             </p>
-            <h2 className="mt-2 font-condensed text-[calc(3rem*var(--fs-title))] uppercase leading-none text-(--c-footer-title) sm:text-[calc(3.75rem*var(--fs-title))]">
+            <h2
+              className="mt-2 font-condensed text-[calc(3rem*var(--fs-title))] uppercase leading-none text-(--c-footer-title) sm:text-[calc(3.75rem*var(--fs-title))]"
+              style={{ fontFamily: "var(--ef-footer-title)" }}
+            >
               {textValue(settings, "footer-title")}
             </h2>
-            <p className="mt-4 max-w-sm text-(--c-footer-text)">
+            <p
+              className="mt-4 max-w-sm text-(--c-footer-text)"
+              style={{ fontFamily: "var(--ef-footer-text)" }}
+            >
               {textValue(settings, "footer-text")}
             </p>
             {email.trim() !== "" && (
               <a
                 href={`mailto:${email}`}
                 className="mt-6 inline-block bg-terracotta px-6 py-3 text-sm font-semibold uppercase tracking-wide text-(--c-footer-email) transition-opacity hover:opacity-90"
+                style={{ fontFamily: "var(--ef-footer-email)" }}
               >
                 {email}
               </a>

@@ -4,6 +4,7 @@ import { Footer } from "@/components/site/footer";
 import { CustomForm } from "@/components/site/custom-form";
 import { getThemeSettings } from "@/lib/theme-data";
 import { textValue } from "@/lib/theme";
+import { CUSTOM_KEYS, customValue, type CustomMediaType } from "@/lib/custom";
 
 export const metadata: Metadata = {
   title: "Press-ons personalizados — Laura",
@@ -27,13 +28,22 @@ export default async function CustomPage() {
       <main className="flex-1">
         <section className="border-b border-border">
           <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
-            <span className="script text-[calc(3rem*var(--fs-script))] text-(--c-custom-script) sm:text-[calc(3.75rem*var(--fs-script))]">
+            <span
+              className="script text-[calc(3rem*var(--fs-script))] text-(--c-custom-script) sm:text-[calc(3.75rem*var(--fs-script))]"
+              style={{ fontFamily: "var(--ef-custom-script)" }}
+            >
               {textValue(settings, "custom-script")}
             </span>
-            <h1 className="mt-2 font-condensed text-[calc(3.75rem*var(--fs-title))] uppercase leading-none text-(--c-custom-title) sm:text-[calc(4.5rem*var(--fs-title))]">
+            <h1
+              className="mt-2 font-condensed text-[calc(3.75rem*var(--fs-title))] uppercase leading-none text-(--c-custom-title) sm:text-[calc(4.5rem*var(--fs-title))]"
+              style={{ fontFamily: "var(--ef-custom-title)" }}
+            >
               {textValue(settings, "custom-title")}
             </h1>
-            <p className="mx-auto mt-5 max-w-xl text-(--c-custom-text)">
+            <p
+              className="mx-auto mt-5 max-w-xl text-(--c-custom-text)"
+              style={{ fontFamily: "var(--ef-custom-text)" }}
+            >
               {textValue(settings, "custom-text")}
             </p>
           </div>
@@ -53,7 +63,17 @@ export default async function CustomPage() {
         </section>
 
         <section className="mx-auto max-w-2xl px-4 py-14 sm:px-6">
-          <CustomForm />
+          <CustomForm
+            sizeLabel={customValue(settings, CUSTOM_KEYS.sizeLabel)}
+            sizeHelp={customValue(settings, CUSTOM_KEYS.sizeHelp)}
+            sizeMedia={customValue(settings, CUSTOM_KEYS.sizeMedia)}
+            sizeMediaType={
+              customValue(
+                settings,
+                CUSTOM_KEYS.sizeMediaType,
+              ) as CustomMediaType
+            }
+          />
         </section>
       </main>
       <Footer />

@@ -26,7 +26,7 @@ export function About({ sections }: { sections: AboutSection[] }) {
                 className="grid items-center gap-8 md:grid-cols-2"
               >
                 <div className={flip ? "md:order-2" : ""}>
-                  <h3 className="hand-underline mb-3 inline-block font-display text-[calc(1.875rem*var(--fs-heading))]">
+                  <h3 className="mb-3 inline-block font-display text-[calc(1.875rem*var(--fs-heading))]">
                     {section.title}
                   </h3>
                   <p className="whitespace-pre-line leading-relaxed text-foreground/80">

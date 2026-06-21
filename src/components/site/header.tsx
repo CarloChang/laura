@@ -21,6 +21,7 @@ export async function Header() {
         <Link
           href="/"
           className="font-playfair text-2xl tracking-tight text-(--c-logo)"
+          style={{ fontFamily: "var(--ef-logo)" }}
         >
           {logo}
           <span className="text-terracotta">.</span>

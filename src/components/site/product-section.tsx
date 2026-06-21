@@ -11,6 +11,10 @@ interface Props {
   kickerColor?: string;
   titleColor?: string;
   scriptColor?: string;
+  /** CSS font-family values (e.g. "var(--ef-nails-title)") for per-element fonts. */
+  kickerFont?: string;
+  titleFont?: string;
+  scriptFont?: string;
 }
 
 export function ProductSection({
@@ -22,6 +26,9 @@ export function ProductSection({
   kickerColor,
   titleColor,
   scriptColor,
+  kickerFont,
+  titleFont,
+  scriptFont,
 }: Props) {
   if (products.length === 0) return null;
   return (
@@ -48,13 +55,13 @@ export function ProductSection({
         <div>
           <p
             className="text-xs font-semibold uppercase tracking-widest text-terracotta"
-            style={{ color: kickerColor }}
+            style={{ color: kickerColor, fontFamily: kickerFont }}
           >
             {kicker}
           </p>
           <h2
             className="flex items-center gap-3 font-monocraft text-[calc(1.5rem*var(--fs-title))] leading-none sm:text-[calc(3.75rem*var(--fs-title))]"
-            style={{ color: titleColor }}
+            style={{ color: titleColor, fontFamily: titleFont }}
           >
             <img src="/icon.png" alt="" aria-hidden className="h-[1.2em] w-auto shrink-0" />
             {title}
@@ -63,7 +70,7 @@ export function ProductSection({
         {script && (
           <span
             className="script text-[calc(1.875rem*var(--fs-script))] text-foreground/50 sm:text-[calc(2.25rem*var(--fs-script))]"
-            style={{ color: scriptColor }}
+            style={{ color: scriptColor, fontFamily: scriptFont }}
           >
             {script}
           </span>

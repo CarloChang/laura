@@ -7,14 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import type { CustomMediaType } from "@/lib/custom";
 
 const SHAPES = ["Ovalada", "Cuadrada"];
 const SIZES = ["Pequeño", "Mediano", "Largo"];
 const MAX_DESIGN_IMAGES = 3;
-
-// Example photo (a nail next to a coin for scale). Replace the file at
-// public/size-example.jpg with Laura's own reference photo.
-const SIZE_EXAMPLE = "/size-example.jpg";
 
 const selectClass =
   "h-10 w-full rounded-md border border-input bg-background px-3 text-sm";
@@ -28,7 +25,17 @@ async function uploadToStorage(file: File): Promise<string> {
   return supabase.storage.from("order-refs").getPublicUrl(path).data.publicUrl;
 }
 
-export function CustomForm() {
+export function CustomForm({
+  sizeLabel,
+  sizeHelp,
+  sizeMedia,
+  sizeMediaType,
+}: {
+  sizeLabel: string;
+  sizeHelp: string;
+  sizeMedia: string;
+  sizeMediaType: CustomMediaType;
+}) {
   const [state, action, pending] = useActionState<OrderState, FormData>(
     submitOrder,
     null,
@@ -131,20 +138,29 @@ export function CustomForm() {
         <Input name="budget" required placeholder="ej. 30–40 €" />
       </Field>
 
-      <Field label="Tamaño de tus uñas (foto con una moneda)">
-        <p className="text-sm text-muted-foreground">
-          Haz una foto de tu uña junto a una moneda para que pueda calcular la
-          talla, como en el ejemplo.
-        </p>
-        {exampleOk && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={SIZE_EXAMPLE}
-            alt="Ejemplo: uña junto a una moneda"
-            onError={() => setExampleOk(false)}
-            className="mt-1 h-32 w-auto rounded-md border border-border object-cover"
-          />
+      <Field label={sizeLabel}>
+        {sizeHelp && (
+          <p className="text-sm text-muted-foreground">{sizeHelp}</p>
         )}
+        {sizeMedia &&
+          exampleOk &&
+          (sizeMediaType === "video" ? (
+            <video
+              src={sizeMedia}
+              controls
+              playsInline
+              onError={() => setExampleOk(false)}
+              className="mt-1 h-40 w-auto rounded-md border border-border object-cover"
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={sizeMedia}
+              alt="Ejemplo: uña junto a una moneda"
+              onError={() => setExampleOk(false)}
+              className="mt-1 h-40 w-auto rounded-md border border-border object-cover"
+            />
+          ))}
         <div className="mt-2 flex items-center gap-4">
           {sizePhoto && (
             // eslint-disable-next-line @next/next/no-img-element

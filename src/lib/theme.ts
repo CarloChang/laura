@@ -34,6 +34,29 @@ export interface FontRole {
   fontClass: string;
 }
 
+/** A selectable font, loaded by the root layout via next/font. */
+export interface FontFamily {
+  /** Stored value, e.g. "playfair". */
+  key: string;
+  label: string;
+  /** The CSS font-family stack this resolves to. */
+  stack: string;
+}
+
+/**
+ * Per-element font override, keyed to the matching TEXT_FIELDS entry. Each text
+ * element can pick its own font; until it's overridden it uses `default`'s font
+ * (via the `--ef-*` CSS var default in globals.css), keeping its original look.
+ */
+export interface ElementFont {
+  /** Setting key + CSS var name (e.g. "ef-hero-title"). */
+  key: string;
+  /** The text field this font belongs to (e.g. "hero-title"). */
+  textKey: string;
+  /** Default font key (a FONT_FAMILIES entry) — the element's original font. */
+  default: string;
+}
+
 export interface TextField {
   key: string;
   label: string;
@@ -87,6 +110,75 @@ export const FONT_ROLES: FontRole[] = [
   { key: "fs-title", label: "Big titles", var: "fs-title", default: 1, min: 0.7, max: 1.6, step: 0.05, desc: "Hero “Press ons”, section titles, footer headline.", sample: "Hechas a medida", fontClass: "font-condensed" },
   { key: "fs-script", label: "Script accents", var: "fs-script", default: 1, min: 0.7, max: 1.6, step: 0.05, desc: "Cursive bits — “hecho a mano”, “¿hablamos?”.", sample: "hecho a mano", fontClass: "script" },
 ];
+
+/**
+ * Fonts loaded by the root layout (next/font), available to assign to any role.
+ * The `stack` references the `--font-*` variable each font exposes.
+ */
+export const FONT_FAMILIES: FontFamily[] = [
+  // Sans-serif
+  { key: "inter", label: "Inter (sans-serif)", stack: "var(--font-inter), ui-sans-serif, system-ui, sans-serif" },
+  { key: "poppins", label: "Poppins (sans-serif)", stack: "var(--font-poppins), ui-sans-serif, system-ui, sans-serif" },
+  { key: "montserrat", label: "Montserrat (sans-serif)", stack: "var(--font-montserrat), ui-sans-serif, system-ui, sans-serif" },
+  { key: "space-grotesk", label: "Space Grotesk (sans-serif)", stack: "var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif" },
+  { key: "work-sans", label: "Work Sans (sans-serif)", stack: "var(--font-work-sans), ui-sans-serif, system-ui, sans-serif" },
+  { key: "manrope", label: "Manrope (sans-serif)", stack: "var(--font-manrope), ui-sans-serif, system-ui, sans-serif" },
+  { key: "outfit", label: "Outfit (sans-serif)", stack: "var(--font-outfit), ui-sans-serif, system-ui, sans-serif" },
+  { key: "dm-sans", label: "DM Sans (sans-serif)", stack: "var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif" },
+  { key: "plus-jakarta", label: "Plus Jakarta Sans (sans-serif)", stack: "var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif" },
+  { key: "figtree", label: "Figtree (sans-serif)", stack: "var(--font-figtree), ui-sans-serif, system-ui, sans-serif" },
+
+  // Serif
+  { key: "dm-serif", label: "DM Serif Display (serif)", stack: "var(--font-dm-serif), ui-serif, Georgia, serif" },
+  { key: "playfair", label: "Playfair Display (serif)", stack: "var(--font-playfair), ui-serif, Georgia, serif" },
+  { key: "cormorant", label: "Cormorant (serif)", stack: "var(--font-cormorant), ui-serif, Georgia, serif" },
+  { key: "eb-garamond", label: "EB Garamond (serif)", stack: "var(--font-eb-garamond), ui-serif, Georgia, serif" },
+  { key: "lora", label: "Lora (serif)", stack: "var(--font-lora), ui-serif, Georgia, serif" },
+  { key: "merriweather", label: "Merriweather (serif)", stack: "var(--font-merriweather), ui-serif, Georgia, serif" },
+  { key: "fraunces", label: "Fraunces (serif)", stack: "var(--font-fraunces), ui-serif, Georgia, serif" },
+  { key: "spectral", label: "Spectral (serif)", stack: "var(--font-spectral), ui-serif, Georgia, serif" },
+  { key: "source-serif", label: "Source Serif 4 (serif)", stack: "var(--font-source-serif), ui-serif, Georgia, serif" },
+  { key: "libre-baskerville", label: "Libre Baskerville (serif)", stack: "var(--font-libre-baskerville), ui-serif, Georgia, serif" },
+
+  // Condensed / display sans
+  { key: "anton", label: "Anton (condensed)", stack: 'var(--font-anton), "Arial Narrow", sans-serif' },
+  { key: "oswald", label: "Oswald (condensed)", stack: 'var(--font-oswald), "Arial Narrow", sans-serif' },
+  { key: "bebas-neue", label: "Bebas Neue (condensed)", stack: 'var(--font-bebas-neue), "Arial Narrow", sans-serif' },
+  { key: "archivo-narrow", label: "Archivo Narrow (condensed)", stack: 'var(--font-archivo-narrow), "Arial Narrow", sans-serif' },
+  { key: "saira-condensed", label: "Saira Condensed (condensed)", stack: 'var(--font-saira-condensed), "Arial Narrow", sans-serif' },
+
+  // Handwritten / script
+  { key: "caveat", label: "Caveat (handwritten)", stack: "var(--font-caveat), cursive" },
+  { key: "ballet", label: "Ballet (script)", stack: "var(--font-ballet), cursive" },
+  { key: "pacifico", label: "Pacifico (script)", stack: "var(--font-pacifico), cursive" },
+  { key: "dancing-script", label: "Dancing Script (script)", stack: "var(--font-dancing-script), cursive" },
+  { key: "satisfy", label: "Satisfy (script)", stack: "var(--font-satisfy), cursive" },
+  { key: "sacramento", label: "Sacramento (script)", stack: "var(--font-sacramento), cursive" },
+  { key: "great-vibes", label: "Great Vibes (script)", stack: "var(--font-great-vibes), cursive" },
+  { key: "lobster", label: "Lobster (script)", stack: "var(--font-lobster), cursive" },
+  { key: "permanent-marker", label: "Permanent Marker (marker)", stack: "var(--font-permanent-marker), cursive" },
+  { key: "shadows-into-light", label: "Shadows Into Light (handwritten)", stack: "var(--font-shadows-into-light), cursive" },
+
+  // Display
+  { key: "bitcount", label: "Bitcount Ink (display)", stack: "var(--font-bitcount), system-ui" },
+  { key: "abril-fatface", label: "Abril Fatface (display)", stack: "var(--font-abril-fatface), system-ui" },
+  { key: "bungee", label: "Bungee (display)", stack: "var(--font-bungee), system-ui" },
+  { key: "righteous", label: "Righteous (display)", stack: "var(--font-righteous), system-ui" },
+  { key: "monoton", label: "Monoton (display)", stack: "var(--font-monoton), system-ui" },
+
+  // Monospace
+  { key: "monocraft", label: "Monocraft (monospace)", stack: "var(--font-monocraft), monospace" },
+  { key: "jetbrains-mono", label: "JetBrains Mono (monospace)", stack: "var(--font-jetbrains-mono), monospace" },
+  { key: "space-mono", label: "Space Mono (monospace)", stack: "var(--font-space-mono), monospace" },
+  { key: "roboto-mono", label: "Roboto Mono (monospace)", stack: "var(--font-roboto-mono), monospace" },
+];
+
+/** Stack for a font key, or the body default if unknown. */
+export function fontStack(key: string): string {
+  return (
+    FONT_FAMILIES.find((f) => f.key === key)?.stack ?? FONT_FAMILIES[0].stack
+  );
+}
 
 export const TEXT_FIELDS: TextField[] = [
   { key: "header-logo", label: "Logo", desc: "Top-left brand name (the “.” after it stays in the accent color).", default: "laura" },
@@ -150,6 +242,37 @@ export function elementColorDefault(key: string): string {
   return COLOR_TOKENS.find((t) => t.key === el.fallback)?.default ?? "#000000";
 }
 
+/**
+ * Per-element font overrides, keyed to the matching TEXT_FIELDS entry. The
+ * `--ef-*` defaults live in globals.css (each element's original font); these
+ * only emit an override once the admin picks a different font.
+ */
+export const ELEMENT_FONTS: ElementFont[] = [
+  { key: "ef-logo", textKey: "header-logo", default: "playfair" },
+  { key: "ef-hero-badge", textKey: "hero-badge", default: "inter" },
+  { key: "ef-hero-title", textKey: "hero-title", default: "bitcount" },
+  { key: "ef-hero-subtitle", textKey: "hero-subtitle", default: "playfair" },
+  { key: "ef-hero-text", textKey: "hero-text", default: "inter" },
+  { key: "ef-nails-kicker", textKey: "nails-kicker", default: "inter" },
+  { key: "ef-nails-title", textKey: "nails-title", default: "monocraft" },
+  { key: "ef-nails-script", textKey: "nails-script", default: "caveat" },
+  { key: "ef-beauty-kicker", textKey: "beauty-kicker", default: "inter" },
+  { key: "ef-beauty-title", textKey: "beauty-title", default: "monocraft" },
+  { key: "ef-beauty-script", textKey: "beauty-script", default: "caveat" },
+  { key: "ef-custom-script", textKey: "custom-script", default: "caveat" },
+  { key: "ef-custom-title", textKey: "custom-title", default: "anton" },
+  { key: "ef-custom-text", textKey: "custom-text", default: "inter" },
+  { key: "ef-footer-script", textKey: "footer-script", default: "caveat" },
+  { key: "ef-footer-title", textKey: "footer-title", default: "anton" },
+  { key: "ef-footer-text", textKey: "footer-text", default: "inter" },
+  { key: "ef-footer-email", textKey: "footer-email", default: "inter" },
+];
+
+/** The font key an element uses until overridden. */
+export function elementFontDefault(key: string): string {
+  return ELEMENT_FONTS.find((e) => e.key === key)?.default ?? FONT_FAMILIES[0].key;
+}
+
 export type ThemeSettings = Record<string, string>;
 
 /** Default value for a setting key (used by the admin form before any save). */
@@ -161,6 +284,7 @@ export function defaultFor(key: string): string {
   const text = TEXT_FIELDS.find((t) => t.key === key);
   if (text) return text.default;
   if (ELEMENT_COLORS.some((e) => e.key === key)) return elementColorDefault(key);
+  if (ELEMENT_FONTS.some((e) => e.key === key)) return elementFontDefault(key);
   return "";
 }
 
@@ -189,6 +313,15 @@ export function buildThemeCss(settings: ThemeSettings): string {
     const value = settings[role.key];
     if (!value || Number(value) === role.default) continue;
     lines.push(`--${role.var}: ${value};`);
+  }
+
+  // Per-element fonts: emit an --ef-* override only when a non-default font is
+  // chosen, so untouched elements keep globals.css's original font.
+  for (const el of ELEMENT_FONTS) {
+    const value = settings[el.key];
+    if (!value || value === el.default) continue;
+    if (!FONT_FAMILIES.some((f) => f.key === value)) continue;
+    lines.push(`--${el.key}: ${fontStack(value)};`);
   }
 
   // Per-element colors only override once they differ from the inherited token,
