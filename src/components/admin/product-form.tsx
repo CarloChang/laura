@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ImageLightbox } from "@/components/admin/image-lightbox";
+import { cn } from "@/lib/utils";
 import type { Product } from "@/lib/types";
 
 export function ProductForm({ product }: { product?: Product }) {
@@ -40,15 +41,26 @@ export function ProductForm({ product }: { product?: Product }) {
     }
   }
 
+  async function handleSubmit(fd: FormData) {
+    if (uploading) {
+      setError("Please wait for the image to finish uploading.");
+      return;
+    }
+    setSaving(true);
+    setError(null);
+    fd.set("image", image);
+    try {
+      await saveProduct(fd);
+      // On success saveProduct redirects, so we never reach here.
+    } catch (e) {
+      // A redirect resolves cleanly here; only real failures land in catch.
+      setError(e instanceof Error ? e.message : "Could not save product");
+      setSaving(false);
+    }
+  }
+
   return (
-    <form
-      action={(fd) => {
-        setSaving(true);
-        fd.set("image", image);
-        return saveProduct(fd);
-      }}
-      className="max-w-xl space-y-5"
-    >
+    <form action={handleSubmit} className="max-w-xl space-y-5">
       {product && <input type="hidden" name="id" value={product.id} />}
 
       <div className="space-y-1.5">
@@ -100,19 +112,27 @@ export function ProductForm({ product }: { product?: Product }) {
               none
             </div>
           )}
-          <Input
-            type="file"
-            accept="image/*"
-            disabled={uploading}
-            onChange={(e) => {
-              const f = e.target.files?.[0];
-              if (f) handleUpload(f);
-            }}
-          />
+          <label
+            className={cn(
+              "inline-flex h-11 cursor-pointer items-center justify-center rounded-lg border border-input bg-background px-4 text-sm font-medium transition-colors hover:bg-accent",
+              uploading && "pointer-events-none opacity-50",
+            )}
+          >
+            {uploading ? "Uploading…" : image ? "Change image" : "Upload image"}
+            <input
+              type="file"
+              accept="image/*"
+              className="sr-only"
+              disabled={uploading}
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) handleUpload(f);
+                // Reset so picking the same file again still fires onChange.
+                e.target.value = "";
+              }}
+            />
+          </label>
         </div>
-        {uploading && (
-          <p className="text-xs text-muted-foreground">Uploading…</p>
-        )}
       </div>
 
       <label className="flex items-center gap-2">
@@ -129,7 +149,13 @@ export function ProductForm({ product }: { product?: Product }) {
 
       <div className="flex gap-2 pt-2">
         <Button type="submit" disabled={saving || uploading}>
-          {saving ? "Saving…" : product ? "Save changes" : "Create product"}
+          {saving
+            ? "Saving…"
+            : uploading
+              ? "Waiting for image…"
+              : product
+                ? "Save changes"
+                : "Create product"}
         </Button>
         <Button
           type="button"

@@ -3,6 +3,16 @@
 import { useState, useTransition } from "react";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { deleteProduct, saveProductOrder } from "@/app/admin/actions";
 import type { Category, Product } from "@/lib/types";
 
@@ -141,21 +151,12 @@ export function ProductsTable({ products }: { products: Product[] }) {
                               href={`/admin/products/${p.id}`}
                               className={buttonVariants({
                                 variant: "ghost",
-                                size: "sm",
+                                size: "default",
                               })}
                             >
                               Edit
                             </Link>
-                            <form action={deleteProduct}>
-                              <input type="hidden" name="id" value={p.id} />
-                              <Button
-                                variant="destructive"
-                                size="sm"
-                                type="submit"
-                              >
-                                Delete
-                              </Button>
-                            </form>
+                            <DeleteProductButton product={p} />
                           </div>
                         </td>
                       </tr>
@@ -178,5 +179,46 @@ export function ProductsTable({ products }: { products: Product[] }) {
         );
       })}
     </div>
+  );
+}
+
+function DeleteProductButton({ product }: { product: Product }) {
+  const [deleting, startDeleting] = useTransition();
+
+  return (
+    <Dialog>
+      <DialogTrigger render={<Button variant="destructive" size="default" />}>
+        Delete
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete this product?</DialogTitle>
+          <DialogDescription>
+            “{product.name}” will be permanently removed from the storefront.
+            This can’t be undone.
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose
+            render={<Button variant="outline" disabled={deleting} />}
+          >
+            Cancel
+          </DialogClose>
+          <Button
+            variant="destructive"
+            disabled={deleting}
+            onClick={() =>
+              startDeleting(async () => {
+                const fd = new FormData();
+                fd.set("id", product.id);
+                await deleteProduct(fd);
+              })
+            }
+          >
+            {deleting ? "Deleting…" : "Delete"}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
