@@ -43,15 +43,45 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-dm-serif), ui-serif, Georgia, serif;
-  --font-condensed: var(--font-anton), "Arial Narrow", sans-serif;
-  --font-script: var(--font-caveat), cursive;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Each role points at an --ff-* indirection var (set in :root and overridable
+     from /admin/appearance), so changing the family there cascades everywhere. */
+  --font-body: var(--ff-body);
+  --font-display: var(--ff-display);
+  --font-condensed: var(--ff-condensed);
+  --font-script: var(--ff-script);
+  --font-sans: var(--ff-body);
 }
 
 :root {
   --radius: 0.5rem;
+
+  /* per-role font families (edited from /admin/appearance) — the default font
+     for each role; overrides are emitted at :root:root by buildThemeCss. */
+  --ff-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --ff-display: var(--font-dm-serif), ui-serif, Georgia, serif;
+  --ff-condensed: var(--font-anton), "Arial Narrow", sans-serif;
+  --ff-script: var(--font-caveat), cursive;
+
+  /* per-element font families (edited from /admin/appearance) — each element's
+     original font; overrides are emitted at :root:root by buildThemeCss. */
+  --ef-logo: var(--font-playfair), ui-serif, Georgia, serif;
+  --ef-hero-badge: var(--ff-body);
+  --ef-hero-title: var(--font-bitcount), system-ui;
+  --ef-hero-subtitle: var(--font-playfair), ui-serif, Georgia, serif;
+  --ef-hero-text: var(--ff-body);
+  --ef-nails-kicker: var(--ff-body);
+  --ef-nails-title: var(--font-monocraft), monospace;
+  --ef-nails-script: var(--ff-script);
+  --ef-beauty-kicker: var(--ff-body);
+  --ef-beauty-title: var(--font-monocraft), monospace;
+  --ef-beauty-script: var(--ff-script);
+  --ef-custom-script: var(--ff-script);
+  --ef-custom-title: var(--ff-condensed);
+  --ef-custom-text: var(--ff-body);
+  --ef-footer-script: var(--ff-script);
+  --ef-footer-title: var(--ff-condensed);
+  --ef-footer-text: var(--ff-body);
+  --ef-footer-email: var(--ff-body);
 
   /* per-text-role font-size multipliers (edited from /admin/appearance) */
   --fs-body: 1;
@@ -166,14 +196,14 @@
 }
 
 .uppercase-condensed {
-  font-family: var(--font-condensed);
+  font-family: var(--ff-condensed);
   text-transform: uppercase;
   letter-spacing: 0.01em;
   line-height: 0.92;
 }
 
 .script {
-  font-family: var(--font-script);
+  font-family: var(--ff-script);
 }
 
 .font-bitcount {
