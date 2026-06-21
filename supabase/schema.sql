@@ -26,11 +26,27 @@ create table if not exists public.about_sections (
   created_at  timestamptz not null default now()
 );
 
+create table if not exists public.theme_settings (
+  key        text primary key,
+  value      text not null,
+  updated_at timestamptz not null default now()
+);
+
 -- Row Level Security ----------------------------------------------------------
 -- Public can READ everything; only logged-in (authenticated) users can write.
 
 alter table public.products enable row level security;
 alter table public.about_sections enable row level security;
+alter table public.theme_settings enable row level security;
+
+drop policy if exists "public read theme" on public.theme_settings;
+create policy "public read theme"
+  on public.theme_settings for select using (true);
+
+drop policy if exists "auth write theme" on public.theme_settings;
+create policy "auth write theme"
+  on public.theme_settings for all
+  to authenticated using (true) with check (true);
 
 drop policy if exists "public read products" on public.products;
 create policy "public read products"

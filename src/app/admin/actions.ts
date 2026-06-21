@@ -107,6 +107,22 @@ export async function saveAboutSection(input: {
   revalidatePath("/admin/about");
 }
 
+export async function saveThemeSettings(settings: Record<string, string>) {
+  const supabase = await createClient();
+  const rows = Object.entries(settings).map(([key, value]) => ({
+    key,
+    value,
+    updated_at: new Date().toISOString(),
+  }));
+  const { error } = await supabase
+    .from("theme_settings")
+    .upsert(rows, { onConflict: "key" });
+  if (error) throw new Error(error.message);
+
+  // Theme CSS is injected by the root layout, so revalidate the whole tree.
+  revalidatePath("/", "layout");
+}
+
 export async function updateOrderStatus(formData: FormData) {
   const id = String(formData.get("id") ?? "");
   const status = String(formData.get("status") ?? "new") as OrderStatus;

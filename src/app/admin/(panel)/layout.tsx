@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { signOut } from "../actions";
 import { Button } from "@/components/ui/button";
+import { AdminNav } from "@/components/admin/admin-nav";
 
 export default function PanelLayout({
   children,
@@ -9,7 +10,7 @@ export default function PanelLayout({
 }) {
   return (
     <div className="min-h-screen">
-      <header className="border-b border-border bg-card">
+      <header className="relative border-b border-border bg-card">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-3 sm:gap-6">
             <Link
@@ -18,17 +19,7 @@ export default function PanelLayout({
             >
               Laura <span className="text-terracotta">admin</span>
             </Link>
-            <nav className="flex items-center gap-3 text-sm sm:gap-4">
-              <Link href="/admin" className="hover:text-terracotta">
-                Products
-              </Link>
-              <Link href="/admin/orders" className="hover:text-terracotta">
-                Requests
-              </Link>
-              <Link href="/admin/about" className="hover:text-terracotta">
-                Content
-              </Link>
-            </nav>
+            <AdminNav />
           </div>
           <div className="flex items-center gap-1 sm:gap-3">
             <Link

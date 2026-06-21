@@ -1,5 +1,5 @@
 const SOCIALS = [
-  { label: "Instagram", href: "https://instagram.com" },
+  { label: "Instagram", href: "https://www.instagram.com/lauu.muaa" },
   { label: "TikTok", href: "https://tiktok.com" },
   { label: "Pinterest", href: "https://pinterest.com" },
 ];
@@ -13,8 +13,8 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="grid gap-10 md:grid-cols-2">
           <div>
-            <p className="script text-4xl text-blush">¿hablamos?</p>
-            <h2 className="mt-2 font-condensed text-5xl uppercase leading-none text-paper sm:text-6xl">
+            <p className="script text-[calc(2.25rem*var(--fs-script))] text-blush">¿hablamos?</p>
+            <h2 className="mt-2 font-condensed text-[calc(3rem*var(--fs-title))] uppercase leading-none text-paper sm:text-[calc(3.75rem*var(--fs-title))]">
               Pedidos y contacto
             </h2>
             <p className="mt-4 max-w-sm text-paper/70">
@@ -38,7 +38,7 @@ export function Footer() {
                 href={s.href}
                 target="_blank"
                 rel="noreferrer"
-                className="font-display text-2xl text-paper transition-colors hover:text-blush"
+                className="font-display text-[calc(1.5rem*var(--fs-heading))] text-paper transition-colors hover:text-blush"
               >
                 {s.label}
               </a>

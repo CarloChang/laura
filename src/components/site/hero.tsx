@@ -19,10 +19,10 @@ export function Hero() {
           <p className="mb-4 inline-block border border-ink/30 bg-paper/40 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-foreground/70 backdrop-blur-sm">
             Personalizadas · hechas a mano
           </p>
-          <h1 className="font-bitcount text-6xl leading-[1.02] sm:text-7xl lg:text-8xl">
+          <h1 className="font-bitcount text-[calc(3.75rem*var(--fs-title))] leading-[1.02] sm:text-[calc(4.5rem*var(--fs-title))] lg:text-[calc(6rem*var(--fs-title))]">
             Press ons
             <br />
-            <span className="font-playfair text-4xl text-terracotta">@lauu.muaa</span>
+            <span className="font-playfair text-[calc(2.25rem*var(--fs-heading))] text-terracotta">@lauu.muaa</span>
           </h1>
           <p className="mt-6 max-w-md text-base text-foreground/80">
             Sets de press-ons personalizados y belleza vintage cuidadosamente
@@ -33,7 +33,7 @@ export function Hero() {
 
         {/* script accent sits over the faded orchid on the right */}
         <div className="relative hidden h-64 md:block">
-          <span className="script absolute bottom-4 right-6 rotate-[-6deg] text-5xl text-terracotta lg:text-6xl">
+          <span className="script absolute bottom-4 right-6 rotate-[-6deg] text-[calc(3rem*var(--fs-script))] text-terracotta lg:text-[calc(3.75rem*var(--fs-script))]">
             hecho a mano
           </span>
         </div>

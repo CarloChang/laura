@@ -9,7 +9,7 @@ export function About({ sections }: { sections: AboutSection[] }) {
     >
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
         <div className="mb-14 text-center">
-          <span className="script text-5xl text-terracotta sm:text-6xl">
+          <span className="script text-[calc(3rem*var(--fs-script))] text-terracotta sm:text-[calc(3.75rem*var(--fs-script))]">
             cómo empezar
           </span>
           <p className="mt-3 text-sm uppercase tracking-widest text-muted-foreground">
@@ -26,7 +26,7 @@ export function About({ sections }: { sections: AboutSection[] }) {
                 className="grid items-center gap-8 md:grid-cols-2"
               >
                 <div className={flip ? "md:order-2" : ""}>
-                  <h3 className="hand-underline mb-3 inline-block font-display text-3xl">
+                  <h3 className="hand-underline mb-3 inline-block font-display text-[calc(1.875rem*var(--fs-heading))]">
                     {section.title}
                   </h3>
                   <p className="whitespace-pre-line leading-relaxed text-foreground/80">

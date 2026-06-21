@@ -13,7 +13,7 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <Dialog>
       <DialogTrigger className="group block w-full cursor-pointer text-left">
-        <div className="relative aspect-square overflow-hidden rounded-md border border-border bg-card">
+        <div className="relative aspect-square overflow-hidden bg-card">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={product.image}
@@ -27,7 +27,7 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </div>
         <div className="mt-3 flex items-baseline justify-between gap-2">
-          <h3 className="font-display text-lg leading-tight text-[#000]">
+          <h3 className="font-display text-[calc(1.125rem*var(--fs-heading))] leading-tight text-[#000]">
             {product.name}
           </h3>
           <span className="shrink-0 font-medium text-terracotta">
@@ -38,7 +38,7 @@ export function ProductCard({ product }: { product: Product }) {
 
       <DialogContent
         showCloseButton={false}
-        className="overflow-hidden bg-[#88ab72] p-0 sm:max-w-md"
+        className="overflow-hidden bg-[#C5E1A5] p-0 sm:max-w-md"
       >
         <div className="relative m-4 aspect-square overflow-hidden rounded-lg bg-card shadow-md">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -55,7 +55,7 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
         <div className="p-6">
           <div className="flex items-baseline justify-between gap-3">
-            <DialogTitle className="font-display text-2xl leading-tight text-[#953553]">
+            <DialogTitle className="font-display text-[calc(1.5rem*var(--fs-heading))] leading-tight text-[#953553]">
               {product.name}
             </DialogTitle>
             <span className="shrink-0 text-lg font-medium text-[#953553]">

@@ -23,10 +23,10 @@ export default function CustomPage() {
       <main className="flex-1">
         <section className="border-b border-border">
           <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
-            <span className="script text-5xl text-terracotta sm:text-6xl">
+            <span className="script text-[calc(3rem*var(--fs-script))] text-terracotta sm:text-[calc(3.75rem*var(--fs-script))]">
               hecho solo para ti
             </span>
-            <h1 className="mt-2 font-condensed text-6xl uppercase leading-none sm:text-7xl">
+            <h1 className="mt-2 font-condensed text-[calc(3.75rem*var(--fs-title))] uppercase leading-none sm:text-[calc(4.5rem*var(--fs-title))]">
               Press-ons custom
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-muted-foreground">

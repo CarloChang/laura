@@ -53,6 +53,12 @@
 :root {
   --radius: 0.5rem;
 
+  /* per-text-role font-size multipliers (edited from /admin/appearance) */
+  --fs-body: 1;
+  --fs-heading: 1;
+  --fs-title: 1;
+  --fs-script: 1;
+
   /* raw brand palette */
   --paper: #f5efe3;
   --ink: #1f1b16;
@@ -107,6 +113,10 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  /* Body-text role scales the whole document proportionally (rem-based text). */
+  html {
+    font-size: calc(100% * var(--fs-body));
   }
   body {
     @apply bg-background text-foreground font-body antialiased;
@@ -168,6 +178,12 @@
 .font-ballet {
   font-family: var(--font-ballet), cursive;
   font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-monocraft {
+  font-family: var(--font-monocraft), monospace;
   font-weight: 400;
   font-style: normal;
 }

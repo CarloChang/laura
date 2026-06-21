@@ -36,12 +36,13 @@ export function ProductSection({ id, kicker, title, script, products }: Props) {
           <p className="text-xs font-semibold uppercase tracking-widest text-terracotta">
             {kicker}
           </p>
-          <h2 className="font-ballet text-6xl leading-none sm:text-6xl">
+          <h2 className="flex items-center gap-3 font-monocraft text-[calc(1.5rem*var(--fs-title))] leading-none sm:text-[calc(3.75rem*var(--fs-title))]">
+            <img src="/icon.png" alt="" aria-hidden className="h-[1.2em] w-auto shrink-0" />
             {title}
           </h2>
         </div>
         {script && (
-          <span className="script text-3xl text-foreground/50 sm:text-4xl">
+          <span className="script text-[calc(1.875rem*var(--fs-script))] text-foreground/50 sm:text-[calc(2.25rem*var(--fs-script))]">
             {script}
           </span>
         )}

@@ -76,8 +76,8 @@ export function ProductsTable({ products }: { products: Product[] }) {
         return (
           <section key={value} className="space-y-3">
             <h2 className="font-condensed text-2xl uppercase">{label}</h2>
-            <div className="overflow-hidden rounded-lg border border-border">
-              <table className="w-full text-sm">
+            <div className="overflow-x-auto rounded-lg border border-border">
+              <table className="w-full min-w-160 text-sm">
                 <thead className="bg-muted/60 text-left uppercase tracking-wide text-muted-foreground">
                   <tr>
                     <th className="p-3">Order</th>
