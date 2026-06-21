@@ -104,6 +104,17 @@ export const TEXT_FIELDS: TextField[] = [
   { key: "custom-script", label: "Custom page — script", desc: "Cursive accent above the title on the “Pedido custom” page.", default: "hecho solo para ti" },
   { key: "custom-title", label: "Custom page — title", desc: "Headline on the “Pedido custom” page.", default: "Press-ons custom" },
   { key: "custom-text", label: "Custom page — paragraph", desc: "Intro paragraph on the “Pedido custom” page.", default: "¿Sueñas con un set que todavía no existe? Elige tu forma, largo y diseño y lo elaboro a mano desde cero. Rellena el formulario y me pongo en contacto contigo.", multiline: true },
+
+  // Footer (appears on every page)
+  { key: "footer-script", label: "Footer — script", desc: "Cursive accent at the top of the footer.", default: "¿hablamos?" },
+  { key: "footer-title", label: "Footer — title", desc: "Footer headline.", default: "Pedidos y contacto" },
+  { key: "footer-text", label: "Footer — paragraph", desc: "Paragraph under the footer title.", default: "¿Tienes una duda o un diseño soñado? Escríbeme por Instagram o al correo — respondo en menos de 24h.", multiline: true },
+  { key: "footer-email", label: "Footer — email", desc: "Contact email — shown as the button and used for its mailto link.", default: "hello@laura.com" },
+  { key: "footer-follow", label: "Footer — follow label", desc: "Small label above the social links.", default: "Sígueme" },
+  { key: "footer-tagline", label: "Footer — tagline", desc: "Small line in the footer’s bottom bar.", default: "Hecho a mano con cariño" },
+  { key: "footer-instagram", label: "Footer — Instagram link", desc: "URL for the Instagram link (leave blank to hide it).", default: "https://www.instagram.com/lauu.muaa" },
+  { key: "footer-tiktok", label: "Footer — TikTok link", desc: "URL for the TikTok link (leave blank to hide it).", default: "https://tiktok.com" },
+  { key: "footer-pinterest", label: "Footer — Pinterest link", desc: "URL for the Pinterest link (leave blank to hide it).", default: "https://pinterest.com" },
 ];
 
 /**
@@ -126,6 +137,10 @@ export const ELEMENT_COLORS: ElementColor[] = [
   { key: "c-custom-script", textKey: "custom-script", fallback: "terracotta" },
   { key: "c-custom-title", textKey: "custom-title", fallback: "foreground" },
   { key: "c-custom-text", textKey: "custom-text", fallback: "muted-foreground" },
+  { key: "c-footer-script", textKey: "footer-script", fallback: "blush" },
+  { key: "c-footer-title", textKey: "footer-title", fallback: "paper" },
+  { key: "c-footer-text", textKey: "footer-text", fallback: "paper" },
+  { key: "c-footer-email", textKey: "footer-email", fallback: "paper" },
 ];
 
 /** The palette-token default hex an element color inherits from. */

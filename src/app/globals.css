@@ -67,7 +67,8 @@
   /* per-headline text colors — inherit a palette token until overridden */
   --c-logo: var(--foreground);
   --c-hero-badge: color-mix(in srgb, var(--foreground) 70%, transparent);
-  --c-hero-title: var(--foreground);
+  /* matches the Bitcount Ink color palette so iOS (no COLRv1) falls back to purple, not black */
+  --c-hero-title: #9c3fc4;
   --c-hero-subtitle: var(--terracotta);
   --c-hero-text: color-mix(in srgb, var(--foreground) 80%, transparent);
   --c-nails-kicker: var(--terracotta);
@@ -79,6 +80,10 @@
   --c-custom-script: var(--terracotta);
   --c-custom-title: var(--foreground);
   --c-custom-text: var(--muted-foreground);
+  --c-footer-script: var(--blush);
+  --c-footer-title: var(--paper);
+  --c-footer-text: color-mix(in srgb, var(--paper) 70%, transparent);
+  --c-footer-email: var(--paper);
 
   /* raw brand palette */
   --paper: #f5efe3;

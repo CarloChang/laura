@@ -40,9 +40,7 @@ export function About({ sections }: { sections: AboutSection[] }) {
                     {section.images.slice(0, 2).map((src, j) => (
                       <div
                         key={j}
-                        className={`overflow-hidden rounded-md border-4 border-card shadow-lg ${
-                          j % 2 ? "rotate-2" : "-rotate-2"
-                        }`}
+                        className="overflow-hidden shadow-lg"
                       >
                         <img
                           src={src}
