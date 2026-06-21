@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { CustomForm } from "@/components/site/custom-form";
+import { getThemeSettings } from "@/lib/theme-data";
+import { textValue } from "@/lib/theme";
 
 export const metadata: Metadata = {
   title: "Press-ons personalizados — Laura",
@@ -16,23 +18,23 @@ const STEPS = [
   "Se envía — normalmente en 7–14 días. 💅",
 ];
 
-export default function CustomPage() {
+export default async function CustomPage() {
+  const settings = await getThemeSettings();
+
   return (
     <>
       <Header />
       <main className="flex-1">
         <section className="border-b border-border">
           <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
-            <span className="script text-[calc(3rem*var(--fs-script))] text-terracotta sm:text-[calc(3.75rem*var(--fs-script))]">
-              hecho solo para ti
+            <span className="script text-[calc(3rem*var(--fs-script))] text-(--c-custom-script) sm:text-[calc(3.75rem*var(--fs-script))]">
+              {textValue(settings, "custom-script")}
             </span>
-            <h1 className="mt-2 font-condensed text-[calc(3.75rem*var(--fs-title))] uppercase leading-none sm:text-[calc(4.5rem*var(--fs-title))]">
-              Press-ons custom
+            <h1 className="mt-2 font-condensed text-[calc(3.75rem*var(--fs-title))] uppercase leading-none text-(--c-custom-title) sm:text-[calc(4.5rem*var(--fs-title))]">
+              {textValue(settings, "custom-title")}
             </h1>
-            <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-              ¿Sueñas con un set que todavía no existe? Elige tu forma, largo y
-              diseño y lo elaboro a mano desde cero. Rellena el formulario y me
-              pongo en contacto contigo.
+            <p className="mx-auto mt-5 max-w-xl text-(--c-custom-text)">
+              {textValue(settings, "custom-text")}
             </p>
           </div>
         </section>

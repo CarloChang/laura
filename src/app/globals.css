@@ -64,6 +64,22 @@
   --pcard-accent: #953553;
   --pcard-text: #000000;
 
+  /* per-headline text colors — inherit a palette token until overridden */
+  --c-logo: var(--foreground);
+  --c-hero-badge: color-mix(in srgb, var(--foreground) 70%, transparent);
+  --c-hero-title: var(--foreground);
+  --c-hero-subtitle: var(--terracotta);
+  --c-hero-text: color-mix(in srgb, var(--foreground) 80%, transparent);
+  --c-nails-kicker: var(--terracotta);
+  --c-nails-title: var(--foreground);
+  --c-nails-script: color-mix(in srgb, var(--foreground) 50%, transparent);
+  --c-beauty-kicker: var(--terracotta);
+  --c-beauty-title: var(--foreground);
+  --c-beauty-script: color-mix(in srgb, var(--foreground) 50%, transparent);
+  --c-custom-script: var(--terracotta);
+  --c-custom-title: var(--foreground);
+  --c-custom-text: var(--muted-foreground);
+
   /* raw brand palette */
   --paper: #f5efe3;
   --ink: #1f1b16;

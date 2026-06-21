@@ -7,9 +7,22 @@ interface Props {
   title: string;
   script?: string;
   products: Product[];
+  /** CSS color values (e.g. "var(--c-nails-title)") for per-section overrides. */
+  kickerColor?: string;
+  titleColor?: string;
+  scriptColor?: string;
 }
 
-export function ProductSection({ id, kicker, title, script, products }: Props) {
+export function ProductSection({
+  id,
+  kicker,
+  title,
+  script,
+  products,
+  kickerColor,
+  titleColor,
+  scriptColor,
+}: Props) {
   if (products.length === 0) return null;
   return (
     <section id={id} className="relative scroll-mt-20">
@@ -33,16 +46,25 @@ export function ProductSection({ id, kicker, title, script, products }: Props) {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-terracotta">
+          <p
+            className="text-xs font-semibold uppercase tracking-widest text-terracotta"
+            style={{ color: kickerColor }}
+          >
             {kicker}
           </p>
-          <h2 className="flex items-center gap-3 font-monocraft text-[calc(1.5rem*var(--fs-title))] leading-none sm:text-[calc(3.75rem*var(--fs-title))]">
+          <h2
+            className="flex items-center gap-3 font-monocraft text-[calc(1.5rem*var(--fs-title))] leading-none sm:text-[calc(3.75rem*var(--fs-title))]"
+            style={{ color: titleColor }}
+          >
             <img src="/icon.png" alt="" aria-hidden className="h-[1.2em] w-auto shrink-0" />
             {title}
           </h2>
         </div>
         {script && (
-          <span className="script text-[calc(1.875rem*var(--fs-script))] text-foreground/50 sm:text-[calc(2.25rem*var(--fs-script))]">
+          <span
+            className="script text-[calc(1.875rem*var(--fs-script))] text-foreground/50 sm:text-[calc(2.25rem*var(--fs-script))]"
+            style={{ color: scriptColor }}
+          >
             {script}
           </span>
         )}
