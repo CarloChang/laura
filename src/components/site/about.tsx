@@ -1,6 +1,14 @@
 import type { AboutSection } from "@/lib/types";
 
-export function About({ sections }: { sections: AboutSection[] }) {
+export function About({
+  sections,
+  script,
+  kicker,
+}: {
+  sections: AboutSection[];
+  script: string;
+  kicker: string;
+}) {
   if (sections.length === 0) return null;
   return (
     <section
@@ -9,12 +17,28 @@ export function About({ sections }: { sections: AboutSection[] }) {
     >
       <div className="mx-auto max-w-5xl px-4 py-20 sm:px-6">
         <div className="mb-14 text-center">
-          <span className="script text-[calc(3rem*var(--fs-script))] text-terracotta sm:text-[calc(3.75rem*var(--fs-script))]">
-            cómo empezar
-          </span>
-          <p className="mt-3 text-sm uppercase tracking-widest text-muted-foreground">
-            todo lo que necesitas saber antes de pedir
-          </p>
+          {script && (
+            <span
+              className="script text-[calc(3rem*var(--fs-script))] sm:text-[calc(3.75rem*var(--fs-script))]"
+              style={{
+                color: "var(--c-about-script)",
+                fontFamily: "var(--ef-about-script)",
+              }}
+            >
+              {script}
+            </span>
+          )}
+          {kicker && (
+            <p
+              className="mt-3 text-sm uppercase tracking-widest"
+              style={{
+                color: "var(--c-about-kicker)",
+                fontFamily: "var(--ef-about-kicker)",
+              }}
+            >
+              {kicker}
+            </p>
+          )}
         </div>
 
         <div className="space-y-16">

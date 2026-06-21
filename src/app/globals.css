@@ -73,6 +73,8 @@
   --ef-nails-kicker: var(--ff-body);
   --ef-nails-title: var(--font-monocraft), monospace;
   --ef-nails-script: var(--ff-script);
+  --ef-about-script: var(--ff-script);
+  --ef-about-kicker: var(--ff-body);
   --ef-beauty-kicker: var(--ff-body);
   --ef-beauty-title: var(--font-monocraft), monospace;
   --ef-beauty-script: var(--ff-script);
@@ -106,6 +108,8 @@
   --c-nails-kicker: var(--terracotta);
   --c-nails-title: var(--foreground);
   --c-nails-script: color-mix(in srgb, var(--foreground) 50%, transparent);
+  --c-about-script: var(--terracotta);
+  --c-about-kicker: var(--muted-foreground);
   --c-beauty-kicker: var(--terracotta);
   --c-beauty-title: var(--foreground);
   --c-beauty-script: color-mix(in srgb, var(--foreground) 50%, transparent);

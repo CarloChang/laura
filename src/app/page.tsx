@@ -33,7 +33,11 @@ export default async function Home() {
           scriptFont="var(--ef-nails-script)"
           products={nails}
         />
-        <About sections={about} />
+        <About
+          sections={about}
+          script={textValue(settings, "about-script")}
+          kicker={textValue(settings, "about-kicker")}
+        />
         <ProductSection
           id="beauty"
           kicker={textValue(settings, "beauty-kicker")}
