@@ -89,12 +89,6 @@ export function ThemeForm({ settings }: { settings: ThemeSettings }) {
     setValues((v) => ({ ...v, [key]: value }));
   }
 
-  function resetAll() {
-    const defaults: ThemeSettings = {};
-    for (const k of Object.keys(values)) defaults[k] = defaultFor(k);
-    setValues(defaults);
-  }
-
   function save() {
     setError(null);
     setSaved(false);
@@ -241,9 +235,6 @@ export function ThemeForm({ settings }: { settings: ThemeSettings }) {
       <div className="sticky bottom-0 flex items-center gap-3 border-t border-border bg-background/90 py-3 backdrop-blur">
         <Button onClick={save} disabled={!dirty || saving}>
           {saving ? "Saving…" : "Save changes"}
-        </Button>
-        <Button variant="ghost" onClick={resetAll} disabled={saving} type="button">
-          Reset to defaults
         </Button>
         {saved && <span className="text-sm text-olive">Saved ✓</span>}
         {dirty && !saving && (
